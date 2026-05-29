@@ -15,6 +15,7 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as OnboardingTopicsRouteImport } from './routes/onboarding.topics'
 import { Route as OnboardingInsightsRouteImport } from './routes/onboarding.insights'
 import { Route as OnboardingCompanyRouteImport } from './routes/onboarding.company'
 import { Route as OnboardingBrandRouteImport } from './routes/onboarding.brand'
@@ -50,6 +51,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OnboardingTopicsRoute = OnboardingTopicsRouteImport.update({
+  id: '/onboarding/topics',
+  path: '/onboarding/topics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OnboardingInsightsRoute = OnboardingInsightsRouteImport.update({
   id: '/onboarding/insights',
   path: '/onboarding/insights',
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/onboarding/brand': typeof OnboardingBrandRoute
   '/onboarding/company': typeof OnboardingCompanyRoute
   '/onboarding/insights': typeof OnboardingInsightsRoute
+  '/onboarding/topics': typeof OnboardingTopicsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/onboarding/brand': typeof OnboardingBrandRoute
   '/onboarding/company': typeof OnboardingCompanyRoute
   '/onboarding/insights': typeof OnboardingInsightsRoute
+  '/onboarding/topics': typeof OnboardingTopicsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/onboarding/brand': typeof OnboardingBrandRoute
   '/onboarding/company': typeof OnboardingCompanyRoute
   '/onboarding/insights': typeof OnboardingInsightsRoute
+  '/onboarding/topics': typeof OnboardingTopicsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/onboarding/brand'
     | '/onboarding/company'
     | '/onboarding/insights'
+    | '/onboarding/topics'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/onboarding/brand'
     | '/onboarding/company'
     | '/onboarding/insights'
+    | '/onboarding/topics'
   id:
     | '__root__'
     | '/'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/onboarding/brand'
     | '/onboarding/company'
     | '/onboarding/insights'
+    | '/onboarding/topics'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -158,6 +170,7 @@ export interface RootRouteChildren {
   OnboardingBrandRoute: typeof OnboardingBrandRoute
   OnboardingCompanyRoute: typeof OnboardingCompanyRoute
   OnboardingInsightsRoute: typeof OnboardingInsightsRoute
+  OnboardingTopicsRoute: typeof OnboardingTopicsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -204,6 +217,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/onboarding/topics': {
+      id: '/onboarding/topics'
+      path: '/onboarding/topics'
+      fullPath: '/onboarding/topics'
+      preLoaderRoute: typeof OnboardingTopicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/onboarding/insights': {
       id: '/onboarding/insights'
       path: '/onboarding/insights'
@@ -246,6 +266,7 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingBrandRoute: OnboardingBrandRoute,
   OnboardingCompanyRoute: OnboardingCompanyRoute,
   OnboardingInsightsRoute: OnboardingInsightsRoute,
+  OnboardingTopicsRoute: OnboardingTopicsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

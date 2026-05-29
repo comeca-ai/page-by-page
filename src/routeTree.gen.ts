@@ -16,6 +16,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as OnboardingTopicsRouteImport } from './routes/onboarding.topics'
+import { Route as OnboardingPromptsRouteImport } from './routes/onboarding.prompts'
 import { Route as OnboardingInsightsRouteImport } from './routes/onboarding.insights'
 import { Route as OnboardingCompanyRouteImport } from './routes/onboarding.company'
 import { Route as OnboardingBrandRouteImport } from './routes/onboarding.brand'
@@ -56,6 +57,11 @@ const OnboardingTopicsRoute = OnboardingTopicsRouteImport.update({
   path: '/onboarding/topics',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OnboardingPromptsRoute = OnboardingPromptsRouteImport.update({
+  id: '/onboarding/prompts',
+  path: '/onboarding/prompts',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OnboardingInsightsRoute = OnboardingInsightsRouteImport.update({
   id: '/onboarding/insights',
   path: '/onboarding/insights',
@@ -88,6 +94,7 @@ export interface FileRoutesByFullPath {
   '/onboarding/brand': typeof OnboardingBrandRoute
   '/onboarding/company': typeof OnboardingCompanyRoute
   '/onboarding/insights': typeof OnboardingInsightsRoute
+  '/onboarding/prompts': typeof OnboardingPromptsRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
 }
 export interface FileRoutesByTo {
@@ -101,6 +108,7 @@ export interface FileRoutesByTo {
   '/onboarding/brand': typeof OnboardingBrandRoute
   '/onboarding/company': typeof OnboardingCompanyRoute
   '/onboarding/insights': typeof OnboardingInsightsRoute
+  '/onboarding/prompts': typeof OnboardingPromptsRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
 }
 export interface FileRoutesById {
@@ -115,6 +123,7 @@ export interface FileRoutesById {
   '/onboarding/brand': typeof OnboardingBrandRoute
   '/onboarding/company': typeof OnboardingCompanyRoute
   '/onboarding/insights': typeof OnboardingInsightsRoute
+  '/onboarding/prompts': typeof OnboardingPromptsRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
 }
 export interface FileRouteTypes {
@@ -130,6 +139,7 @@ export interface FileRouteTypes {
     | '/onboarding/brand'
     | '/onboarding/company'
     | '/onboarding/insights'
+    | '/onboarding/prompts'
     | '/onboarding/topics'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -143,6 +153,7 @@ export interface FileRouteTypes {
     | '/onboarding/brand'
     | '/onboarding/company'
     | '/onboarding/insights'
+    | '/onboarding/prompts'
     | '/onboarding/topics'
   id:
     | '__root__'
@@ -156,6 +167,7 @@ export interface FileRouteTypes {
     | '/onboarding/brand'
     | '/onboarding/company'
     | '/onboarding/insights'
+    | '/onboarding/prompts'
     | '/onboarding/topics'
   fileRoutesById: FileRoutesById
 }
@@ -170,6 +182,7 @@ export interface RootRouteChildren {
   OnboardingBrandRoute: typeof OnboardingBrandRoute
   OnboardingCompanyRoute: typeof OnboardingCompanyRoute
   OnboardingInsightsRoute: typeof OnboardingInsightsRoute
+  OnboardingPromptsRoute: typeof OnboardingPromptsRoute
   OnboardingTopicsRoute: typeof OnboardingTopicsRoute
 }
 
@@ -224,6 +237,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingTopicsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/onboarding/prompts': {
+      id: '/onboarding/prompts'
+      path: '/onboarding/prompts'
+      fullPath: '/onboarding/prompts'
+      preLoaderRoute: typeof OnboardingPromptsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/onboarding/insights': {
       id: '/onboarding/insights'
       path: '/onboarding/insights'
@@ -266,6 +286,7 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingBrandRoute: OnboardingBrandRoute,
   OnboardingCompanyRoute: OnboardingCompanyRoute,
   OnboardingInsightsRoute: OnboardingInsightsRoute,
+  OnboardingPromptsRoute: OnboardingPromptsRoute,
   OnboardingTopicsRoute: OnboardingTopicsRoute,
 }
 export const routeTree = rootRouteImport

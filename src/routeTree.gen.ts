@@ -17,6 +17,7 @@ import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as OnboardingCompanyRouteImport } from './routes/onboarding.company'
 import { Route as OnboardingBrandRouteImport } from './routes/onboarding.brand'
+import { Route as OnboardingAnalyzingRouteImport } from './routes/onboarding.analyzing'
 
 const VerifyEmailRoute = VerifyEmailRouteImport.update({
   id: '/verify-email',
@@ -58,6 +59,11 @@ const OnboardingBrandRoute = OnboardingBrandRouteImport.update({
   path: '/onboarding/brand',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OnboardingAnalyzingRoute = OnboardingAnalyzingRouteImport.update({
+  id: '/onboarding/analyzing',
+  path: '/onboarding/analyzing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/onboarding/analyzing': typeof OnboardingAnalyzingRoute
   '/onboarding/brand': typeof OnboardingBrandRoute
   '/onboarding/company': typeof OnboardingCompanyRoute
 }
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/onboarding/analyzing': typeof OnboardingAnalyzingRoute
   '/onboarding/brand': typeof OnboardingBrandRoute
   '/onboarding/company': typeof OnboardingCompanyRoute
 }
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/onboarding/analyzing': typeof OnboardingAnalyzingRoute
   '/onboarding/brand': typeof OnboardingBrandRoute
   '/onboarding/company': typeof OnboardingCompanyRoute
 }
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/verify-email'
+    | '/onboarding/analyzing'
     | '/onboarding/brand'
     | '/onboarding/company'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/verify-email'
+    | '/onboarding/analyzing'
     | '/onboarding/brand'
     | '/onboarding/company'
   id:
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/verify-email'
+    | '/onboarding/analyzing'
     | '/onboarding/brand'
     | '/onboarding/company'
   fileRoutesById: FileRoutesById
@@ -130,6 +142,7 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   SignupRoute: typeof SignupRoute
   VerifyEmailRoute: typeof VerifyEmailRoute
+  OnboardingAnalyzingRoute: typeof OnboardingAnalyzingRoute
   OnboardingBrandRoute: typeof OnboardingBrandRoute
   OnboardingCompanyRoute: typeof OnboardingCompanyRoute
 }
@@ -192,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingBrandRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/onboarding/analyzing': {
+      id: '/onboarding/analyzing'
+      path: '/onboarding/analyzing'
+      fullPath: '/onboarding/analyzing'
+      preLoaderRoute: typeof OnboardingAnalyzingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -202,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   SignupRoute: SignupRoute,
   VerifyEmailRoute: VerifyEmailRoute,
+  OnboardingAnalyzingRoute: OnboardingAnalyzingRoute,
   OnboardingBrandRoute: OnboardingBrandRoute,
   OnboardingCompanyRoute: OnboardingCompanyRoute,
 }

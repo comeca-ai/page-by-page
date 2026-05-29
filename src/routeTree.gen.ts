@@ -9,11 +9,29 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VerifyEmailRouteImport } from './routes/verify-email'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as OnboardingTopicsRouteImport } from './routes/onboarding.topics'
+import { Route as OnboardingPromptsRouteImport } from './routes/onboarding.prompts'
+import { Route as OnboardingInsightsRouteImport } from './routes/onboarding.insights'
+import { Route as OnboardingCompanyRouteImport } from './routes/onboarding.company'
+import { Route as OnboardingBrandRouteImport } from './routes/onboarding.brand'
+import { Route as OnboardingAnalyzingRouteImport } from './routes/onboarding.analyzing'
 
+const VerifyEmailRoute = VerifyEmailRouteImport.update({
+  id: '/verify-email',
+  path: '/verify-email',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
@@ -34,18 +52,64 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OnboardingTopicsRoute = OnboardingTopicsRouteImport.update({
+  id: '/onboarding/topics',
+  path: '/onboarding/topics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingPromptsRoute = OnboardingPromptsRouteImport.update({
+  id: '/onboarding/prompts',
+  path: '/onboarding/prompts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingInsightsRoute = OnboardingInsightsRouteImport.update({
+  id: '/onboarding/insights',
+  path: '/onboarding/insights',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingCompanyRoute = OnboardingCompanyRouteImport.update({
+  id: '/onboarding/company',
+  path: '/onboarding/company',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingBrandRoute = OnboardingBrandRouteImport.update({
+  id: '/onboarding/brand',
+  path: '/onboarding/brand',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingAnalyzingRoute = OnboardingAnalyzingRouteImport.update({
+  id: '/onboarding/analyzing',
+  path: '/onboarding/analyzing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/signup': typeof SignupRoute
+  '/verify-email': typeof VerifyEmailRoute
+  '/onboarding/analyzing': typeof OnboardingAnalyzingRoute
+  '/onboarding/brand': typeof OnboardingBrandRoute
+  '/onboarding/company': typeof OnboardingCompanyRoute
+  '/onboarding/insights': typeof OnboardingInsightsRoute
+  '/onboarding/prompts': typeof OnboardingPromptsRoute
+  '/onboarding/topics': typeof OnboardingTopicsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/signup': typeof SignupRoute
+  '/verify-email': typeof VerifyEmailRoute
+  '/onboarding/analyzing': typeof OnboardingAnalyzingRoute
+  '/onboarding/brand': typeof OnboardingBrandRoute
+  '/onboarding/company': typeof OnboardingCompanyRoute
+  '/onboarding/insights': typeof OnboardingInsightsRoute
+  '/onboarding/prompts': typeof OnboardingPromptsRoute
+  '/onboarding/topics': typeof OnboardingTopicsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +117,58 @@ export interface FileRoutesById {
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/signup': typeof SignupRoute
+  '/verify-email': typeof VerifyEmailRoute
+  '/onboarding/analyzing': typeof OnboardingAnalyzingRoute
+  '/onboarding/brand': typeof OnboardingBrandRoute
+  '/onboarding/company': typeof OnboardingCompanyRoute
+  '/onboarding/insights': typeof OnboardingInsightsRoute
+  '/onboarding/prompts': typeof OnboardingPromptsRoute
+  '/onboarding/topics': typeof OnboardingTopicsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/forgot-password' | '/login' | '/reset-password'
+  fullPaths:
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/reset-password'
+    | '/signup'
+    | '/verify-email'
+    | '/onboarding/analyzing'
+    | '/onboarding/brand'
+    | '/onboarding/company'
+    | '/onboarding/insights'
+    | '/onboarding/prompts'
+    | '/onboarding/topics'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/forgot-password' | '/login' | '/reset-password'
-  id: '__root__' | '/' | '/forgot-password' | '/login' | '/reset-password'
+  to:
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/reset-password'
+    | '/signup'
+    | '/verify-email'
+    | '/onboarding/analyzing'
+    | '/onboarding/brand'
+    | '/onboarding/company'
+    | '/onboarding/insights'
+    | '/onboarding/prompts'
+    | '/onboarding/topics'
+  id:
+    | '__root__'
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/reset-password'
+    | '/signup'
+    | '/verify-email'
+    | '/onboarding/analyzing'
+    | '/onboarding/brand'
+    | '/onboarding/company'
+    | '/onboarding/insights'
+    | '/onboarding/prompts'
+    | '/onboarding/topics'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,10 +176,32 @@ export interface RootRouteChildren {
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  SignupRoute: typeof SignupRoute
+  VerifyEmailRoute: typeof VerifyEmailRoute
+  OnboardingAnalyzingRoute: typeof OnboardingAnalyzingRoute
+  OnboardingBrandRoute: typeof OnboardingBrandRoute
+  OnboardingCompanyRoute: typeof OnboardingCompanyRoute
+  OnboardingInsightsRoute: typeof OnboardingInsightsRoute
+  OnboardingPromptsRoute: typeof OnboardingPromptsRoute
+  OnboardingTopicsRoute: typeof OnboardingTopicsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/verify-email': {
+      id: '/verify-email'
+      path: '/verify-email'
+      fullPath: '/verify-email'
+      preLoaderRoute: typeof VerifyEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reset-password': {
       id: '/reset-password'
       path: '/reset-password'
@@ -99,6 +230,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/onboarding/topics': {
+      id: '/onboarding/topics'
+      path: '/onboarding/topics'
+      fullPath: '/onboarding/topics'
+      preLoaderRoute: typeof OnboardingTopicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding/prompts': {
+      id: '/onboarding/prompts'
+      path: '/onboarding/prompts'
+      fullPath: '/onboarding/prompts'
+      preLoaderRoute: typeof OnboardingPromptsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding/insights': {
+      id: '/onboarding/insights'
+      path: '/onboarding/insights'
+      fullPath: '/onboarding/insights'
+      preLoaderRoute: typeof OnboardingInsightsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding/company': {
+      id: '/onboarding/company'
+      path: '/onboarding/company'
+      fullPath: '/onboarding/company'
+      preLoaderRoute: typeof OnboardingCompanyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding/brand': {
+      id: '/onboarding/brand'
+      path: '/onboarding/brand'
+      fullPath: '/onboarding/brand'
+      preLoaderRoute: typeof OnboardingBrandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding/analyzing': {
+      id: '/onboarding/analyzing'
+      path: '/onboarding/analyzing'
+      fullPath: '/onboarding/analyzing'
+      preLoaderRoute: typeof OnboardingAnalyzingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +280,14 @@ const rootRouteChildren: RootRouteChildren = {
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  SignupRoute: SignupRoute,
+  VerifyEmailRoute: VerifyEmailRoute,
+  OnboardingAnalyzingRoute: OnboardingAnalyzingRoute,
+  OnboardingBrandRoute: OnboardingBrandRoute,
+  OnboardingCompanyRoute: OnboardingCompanyRoute,
+  OnboardingInsightsRoute: OnboardingInsightsRoute,
+  OnboardingPromptsRoute: OnboardingPromptsRoute,
+  OnboardingTopicsRoute: OnboardingTopicsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

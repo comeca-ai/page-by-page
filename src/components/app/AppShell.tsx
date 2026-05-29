@@ -11,13 +11,13 @@ import {
   ChevronDown,
 } from "lucide-react";
 
-const NAV = [
+const NAV: Array<{ to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean }> = [
   { to: "/app", label: "Visão geral", icon: LayoutDashboard, exact: true },
   { to: "/app/prompts", label: "Perguntas", icon: MessageSquareQuote },
   { to: "/app/mentions", label: "Menções", icon: Quote },
   { to: "/app/competitors", label: "Concorrentes", icon: Users },
   { to: "/app/settings", label: "Ajustes", icon: Settings },
-] as const;
+];
 
 export function AppShell({ children }: { children?: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });

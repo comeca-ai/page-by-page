@@ -23,10 +23,14 @@ import { Route as OnboardingInsightsRouteImport } from './routes/onboarding.insi
 import { Route as OnboardingCompanyRouteImport } from './routes/onboarding.company'
 import { Route as OnboardingBrandRouteImport } from './routes/onboarding.brand'
 import { Route as OnboardingAnalyzingRouteImport } from './routes/onboarding.analyzing'
+import { Route as AppTeamRouteImport } from './routes/app.team'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as AppPromptsRouteImport } from './routes/app.prompts'
 import { Route as AppMentionsRouteImport } from './routes/app.mentions'
 import { Route as AppCompetitorsRouteImport } from './routes/app.competitors'
+import { Route as AppBillingRouteImport } from './routes/app.billing'
+import { Route as AppAlertsRouteImport } from './routes/app.alerts'
+import { Route as AppPromptsPromptIdRouteImport } from './routes/app.prompts.$promptId'
 
 const VerifyEmailRoute = VerifyEmailRouteImport.update({
   id: '/verify-email',
@@ -98,6 +102,11 @@ const OnboardingAnalyzingRoute = OnboardingAnalyzingRouteImport.update({
   path: '/onboarding/analyzing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppTeamRoute = AppTeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppSettingsRoute = AppSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -118,6 +127,21 @@ const AppCompetitorsRoute = AppCompetitorsRouteImport.update({
   path: '/competitors',
   getParentRoute: () => AppRoute,
 } as any)
+const AppBillingRoute = AppBillingRouteImport.update({
+  id: '/billing',
+  path: '/billing',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAlertsRoute = AppAlertsRouteImport.update({
+  id: '/alerts',
+  path: '/alerts',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPromptsPromptIdRoute = AppPromptsPromptIdRouteImport.update({
+  id: '/$promptId',
+  path: '/$promptId',
+  getParentRoute: () => AppPromptsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -127,10 +151,13 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/app/alerts': typeof AppAlertsRoute
+  '/app/billing': typeof AppBillingRoute
   '/app/competitors': typeof AppCompetitorsRoute
   '/app/mentions': typeof AppMentionsRoute
-  '/app/prompts': typeof AppPromptsRoute
+  '/app/prompts': typeof AppPromptsRouteWithChildren
   '/app/settings': typeof AppSettingsRoute
+  '/app/team': typeof AppTeamRoute
   '/onboarding/analyzing': typeof OnboardingAnalyzingRoute
   '/onboarding/brand': typeof OnboardingBrandRoute
   '/onboarding/company': typeof OnboardingCompanyRoute
@@ -138,6 +165,7 @@ export interface FileRoutesByFullPath {
   '/onboarding/prompts': typeof OnboardingPromptsRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
   '/app/': typeof AppIndexRoute
+  '/app/prompts/$promptId': typeof AppPromptsPromptIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -146,10 +174,13 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/app/alerts': typeof AppAlertsRoute
+  '/app/billing': typeof AppBillingRoute
   '/app/competitors': typeof AppCompetitorsRoute
   '/app/mentions': typeof AppMentionsRoute
-  '/app/prompts': typeof AppPromptsRoute
+  '/app/prompts': typeof AppPromptsRouteWithChildren
   '/app/settings': typeof AppSettingsRoute
+  '/app/team': typeof AppTeamRoute
   '/onboarding/analyzing': typeof OnboardingAnalyzingRoute
   '/onboarding/brand': typeof OnboardingBrandRoute
   '/onboarding/company': typeof OnboardingCompanyRoute
@@ -157,6 +188,7 @@ export interface FileRoutesByTo {
   '/onboarding/prompts': typeof OnboardingPromptsRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
   '/app': typeof AppIndexRoute
+  '/app/prompts/$promptId': typeof AppPromptsPromptIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -167,10 +199,13 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/app/alerts': typeof AppAlertsRoute
+  '/app/billing': typeof AppBillingRoute
   '/app/competitors': typeof AppCompetitorsRoute
   '/app/mentions': typeof AppMentionsRoute
-  '/app/prompts': typeof AppPromptsRoute
+  '/app/prompts': typeof AppPromptsRouteWithChildren
   '/app/settings': typeof AppSettingsRoute
+  '/app/team': typeof AppTeamRoute
   '/onboarding/analyzing': typeof OnboardingAnalyzingRoute
   '/onboarding/brand': typeof OnboardingBrandRoute
   '/onboarding/company': typeof OnboardingCompanyRoute
@@ -178,6 +213,7 @@ export interface FileRoutesById {
   '/onboarding/prompts': typeof OnboardingPromptsRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
   '/app/': typeof AppIndexRoute
+  '/app/prompts/$promptId': typeof AppPromptsPromptIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -189,10 +225,13 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/verify-email'
+    | '/app/alerts'
+    | '/app/billing'
     | '/app/competitors'
     | '/app/mentions'
     | '/app/prompts'
     | '/app/settings'
+    | '/app/team'
     | '/onboarding/analyzing'
     | '/onboarding/brand'
     | '/onboarding/company'
@@ -200,6 +239,7 @@ export interface FileRouteTypes {
     | '/onboarding/prompts'
     | '/onboarding/topics'
     | '/app/'
+    | '/app/prompts/$promptId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -208,10 +248,13 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/verify-email'
+    | '/app/alerts'
+    | '/app/billing'
     | '/app/competitors'
     | '/app/mentions'
     | '/app/prompts'
     | '/app/settings'
+    | '/app/team'
     | '/onboarding/analyzing'
     | '/onboarding/brand'
     | '/onboarding/company'
@@ -219,6 +262,7 @@ export interface FileRouteTypes {
     | '/onboarding/prompts'
     | '/onboarding/topics'
     | '/app'
+    | '/app/prompts/$promptId'
   id:
     | '__root__'
     | '/'
@@ -228,10 +272,13 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/verify-email'
+    | '/app/alerts'
+    | '/app/billing'
     | '/app/competitors'
     | '/app/mentions'
     | '/app/prompts'
     | '/app/settings'
+    | '/app/team'
     | '/onboarding/analyzing'
     | '/onboarding/brand'
     | '/onboarding/company'
@@ -239,6 +286,7 @@ export interface FileRouteTypes {
     | '/onboarding/prompts'
     | '/onboarding/topics'
     | '/app/'
+    | '/app/prompts/$promptId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -357,6 +405,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingAnalyzingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/team': {
+      id: '/app/team'
+      path: '/team'
+      fullPath: '/app/team'
+      preLoaderRoute: typeof AppTeamRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/settings': {
       id: '/app/settings'
       path: '/settings'
@@ -385,22 +440,61 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCompetitorsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/billing': {
+      id: '/app/billing'
+      path: '/billing'
+      fullPath: '/app/billing'
+      preLoaderRoute: typeof AppBillingRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/alerts': {
+      id: '/app/alerts'
+      path: '/alerts'
+      fullPath: '/app/alerts'
+      preLoaderRoute: typeof AppAlertsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/prompts/$promptId': {
+      id: '/app/prompts/$promptId'
+      path: '/$promptId'
+      fullPath: '/app/prompts/$promptId'
+      preLoaderRoute: typeof AppPromptsPromptIdRouteImport
+      parentRoute: typeof AppPromptsRoute
+    }
   }
 }
 
+interface AppPromptsRouteChildren {
+  AppPromptsPromptIdRoute: typeof AppPromptsPromptIdRoute
+}
+
+const AppPromptsRouteChildren: AppPromptsRouteChildren = {
+  AppPromptsPromptIdRoute: AppPromptsPromptIdRoute,
+}
+
+const AppPromptsRouteWithChildren = AppPromptsRoute._addFileChildren(
+  AppPromptsRouteChildren,
+)
+
 interface AppRouteChildren {
+  AppAlertsRoute: typeof AppAlertsRoute
+  AppBillingRoute: typeof AppBillingRoute
   AppCompetitorsRoute: typeof AppCompetitorsRoute
   AppMentionsRoute: typeof AppMentionsRoute
-  AppPromptsRoute: typeof AppPromptsRoute
+  AppPromptsRoute: typeof AppPromptsRouteWithChildren
   AppSettingsRoute: typeof AppSettingsRoute
+  AppTeamRoute: typeof AppTeamRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAlertsRoute: AppAlertsRoute,
+  AppBillingRoute: AppBillingRoute,
   AppCompetitorsRoute: AppCompetitorsRoute,
   AppMentionsRoute: AppMentionsRoute,
-  AppPromptsRoute: AppPromptsRoute,
+  AppPromptsRoute: AppPromptsRouteWithChildren,
   AppSettingsRoute: AppSettingsRoute,
+  AppTeamRoute: AppTeamRoute,
   AppIndexRoute: AppIndexRoute,
 }
 

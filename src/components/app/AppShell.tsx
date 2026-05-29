@@ -9,6 +9,8 @@ import {
   Bell,
   Search,
   ChevronDown,
+  UserPlus,
+  CreditCard,
 } from "lucide-react";
 
 const NAV: Array<{ to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean }> = [
@@ -16,6 +18,9 @@ const NAV: Array<{ to: string; label: string; icon: typeof LayoutDashboard; exac
   { to: "/app/prompts", label: "Perguntas", icon: MessageSquareQuote },
   { to: "/app/mentions", label: "Menções", icon: Quote },
   { to: "/app/competitors", label: "Concorrentes", icon: Users },
+  { to: "/app/alerts", label: "Alertas", icon: Bell },
+  { to: "/app/team", label: "Time", icon: UserPlus },
+  { to: "/app/billing", label: "Plano", icon: CreditCard },
   { to: "/app/settings", label: "Ajustes", icon: Settings },
 ];
 

@@ -14,13 +14,19 @@ import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as OnboardingTopicsRouteImport } from './routes/onboarding.topics'
 import { Route as OnboardingPromptsRouteImport } from './routes/onboarding.prompts'
 import { Route as OnboardingInsightsRouteImport } from './routes/onboarding.insights'
 import { Route as OnboardingCompanyRouteImport } from './routes/onboarding.company'
 import { Route as OnboardingBrandRouteImport } from './routes/onboarding.brand'
 import { Route as OnboardingAnalyzingRouteImport } from './routes/onboarding.analyzing'
+import { Route as AppSettingsRouteImport } from './routes/app.settings'
+import { Route as AppPromptsRouteImport } from './routes/app.prompts'
+import { Route as AppMentionsRouteImport } from './routes/app.mentions'
+import { Route as AppCompetitorsRouteImport } from './routes/app.competitors'
 
 const VerifyEmailRoute = VerifyEmailRouteImport.update({
   id: '/verify-email',
@@ -47,10 +53,20 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
 } as any)
 const OnboardingTopicsRoute = OnboardingTopicsRouteImport.update({
   id: '/onboarding/topics',
@@ -82,20 +98,46 @@ const OnboardingAnalyzingRoute = OnboardingAnalyzingRouteImport.update({
   path: '/onboarding/analyzing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPromptsRoute = AppPromptsRouteImport.update({
+  id: '/prompts',
+  path: '/prompts',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMentionsRoute = AppMentionsRouteImport.update({
+  id: '/mentions',
+  path: '/mentions',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCompetitorsRoute = AppCompetitorsRouteImport.update({
+  id: '/competitors',
+  path: '/competitors',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/app/competitors': typeof AppCompetitorsRoute
+  '/app/mentions': typeof AppMentionsRoute
+  '/app/prompts': typeof AppPromptsRoute
+  '/app/settings': typeof AppSettingsRoute
   '/onboarding/analyzing': typeof OnboardingAnalyzingRoute
   '/onboarding/brand': typeof OnboardingBrandRoute
   '/onboarding/company': typeof OnboardingCompanyRoute
   '/onboarding/insights': typeof OnboardingInsightsRoute
   '/onboarding/prompts': typeof OnboardingPromptsRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -104,43 +146,60 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/app/competitors': typeof AppCompetitorsRoute
+  '/app/mentions': typeof AppMentionsRoute
+  '/app/prompts': typeof AppPromptsRoute
+  '/app/settings': typeof AppSettingsRoute
   '/onboarding/analyzing': typeof OnboardingAnalyzingRoute
   '/onboarding/brand': typeof OnboardingBrandRoute
   '/onboarding/company': typeof OnboardingCompanyRoute
   '/onboarding/insights': typeof OnboardingInsightsRoute
   '/onboarding/prompts': typeof OnboardingPromptsRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
+  '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/app/competitors': typeof AppCompetitorsRoute
+  '/app/mentions': typeof AppMentionsRoute
+  '/app/prompts': typeof AppPromptsRoute
+  '/app/settings': typeof AppSettingsRoute
   '/onboarding/analyzing': typeof OnboardingAnalyzingRoute
   '/onboarding/brand': typeof OnboardingBrandRoute
   '/onboarding/company': typeof OnboardingCompanyRoute
   '/onboarding/insights': typeof OnboardingInsightsRoute
   '/onboarding/prompts': typeof OnboardingPromptsRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/app'
     | '/forgot-password'
     | '/login'
     | '/reset-password'
     | '/signup'
     | '/verify-email'
+    | '/app/competitors'
+    | '/app/mentions'
+    | '/app/prompts'
+    | '/app/settings'
     | '/onboarding/analyzing'
     | '/onboarding/brand'
     | '/onboarding/company'
     | '/onboarding/insights'
     | '/onboarding/prompts'
     | '/onboarding/topics'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -149,30 +208,42 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/verify-email'
+    | '/app/competitors'
+    | '/app/mentions'
+    | '/app/prompts'
+    | '/app/settings'
     | '/onboarding/analyzing'
     | '/onboarding/brand'
     | '/onboarding/company'
     | '/onboarding/insights'
     | '/onboarding/prompts'
     | '/onboarding/topics'
+    | '/app'
   id:
     | '__root__'
     | '/'
+    | '/app'
     | '/forgot-password'
     | '/login'
     | '/reset-password'
     | '/signup'
     | '/verify-email'
+    | '/app/competitors'
+    | '/app/mentions'
+    | '/app/prompts'
+    | '/app/settings'
     | '/onboarding/analyzing'
     | '/onboarding/brand'
     | '/onboarding/company'
     | '/onboarding/insights'
     | '/onboarding/prompts'
     | '/onboarding/topics'
+    | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
@@ -223,12 +294,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
     }
     '/onboarding/topics': {
       id: '/onboarding/topics'
@@ -272,11 +357,58 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingAnalyzingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/settings': {
+      id: '/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/prompts': {
+      id: '/app/prompts'
+      path: '/prompts'
+      fullPath: '/app/prompts'
+      preLoaderRoute: typeof AppPromptsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/mentions': {
+      id: '/app/mentions'
+      path: '/mentions'
+      fullPath: '/app/mentions'
+      preLoaderRoute: typeof AppMentionsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/competitors': {
+      id: '/app/competitors'
+      path: '/competitors'
+      fullPath: '/app/competitors'
+      preLoaderRoute: typeof AppCompetitorsRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppCompetitorsRoute: typeof AppCompetitorsRoute
+  AppMentionsRoute: typeof AppMentionsRoute
+  AppPromptsRoute: typeof AppPromptsRoute
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppCompetitorsRoute: AppCompetitorsRoute,
+  AppMentionsRoute: AppMentionsRoute,
+  AppPromptsRoute: AppPromptsRoute,
+  AppSettingsRoute: AppSettingsRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
   ResetPasswordRoute: ResetPasswordRoute,

@@ -49,7 +49,7 @@ export function AppShell({ children }: { children?: ReactNode }) {
             return (
               <Link
                 key={item.to}
-                to={item.to}
+                to={item.to as "/app"}
                 className={`mb-1 flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition ${
                   active
                     ? "bg-foreground text-background"

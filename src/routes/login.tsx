@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowRight, Eye, EyeOff } from "lucide-react";
 
@@ -13,6 +13,7 @@ export const Route = createFileRoute("/login")({
 });
 
 function LoginPage() {
+  const navigate = useNavigate();
   const [step, setStep] = useState<"email" | "password">("email");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -66,6 +67,15 @@ function LoginPage() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                const isFirstAccess =
+                  typeof window !== "undefined" &&
+                  !localStorage.getItem("mencio_onboarded");
+                if (isFirstAccess) {
+                  localStorage.setItem("mencio_onboarded", "1");
+                  navigate({ to: "/onboarding/company" });
+                } else {
+                  navigate({ to: "/app" });
+                }
               }}
             >
               <h1 className="text-3xl font-semibold tracking-tight">

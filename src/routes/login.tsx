@@ -84,12 +84,12 @@ function LoginPage() {
 
               <div className="mt-5 flex items-center justify-between">
                 <label className="block text-sm font-medium">Senha</label>
-                <button
-                  type="button"
+                <Link
+                  to="/forgot-password"
                   className="text-xs text-muted-foreground underline-offset-4 hover:underline"
                 >
                   Esqueceu sua senha?
-                </button>
+                </Link>
               </div>
               <div className="relative mt-2">
                 <input

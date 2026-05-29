@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "@/components/app/AppShell";
 import { Plus, Play } from "lucide-react";
 
@@ -77,7 +77,15 @@ function Prompts() {
           <tbody>
             {PROMPTS.map((p, i) => (
               <tr key={i} className="border-t border-border hover:bg-secondary/30">
-                <td className="max-w-md px-5 py-4 font-medium">{p.q}</td>
+                <td className="max-w-md px-5 py-4 font-medium">
+                  <Link
+                    to="/app/prompts/$promptId"
+                    params={{ promptId: String(i + 1) }}
+                    className="hover:underline"
+                  >
+                    {p.q}
+                  </Link>
+                </td>
                 <td className="px-5 py-4">
                   <span className="rounded-full bg-secondary px-2 py-0.5 text-xs">
                     {p.topic}

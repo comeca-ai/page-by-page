@@ -171,7 +171,7 @@ function Billing() {
               }`}
               disabled={p.current}
             >
-              {p.current ? "Plano atual" : p.name === "Agência" ? "Falar com vendas" : "Assinar"}
+              {p.current ? "Plano atual" : "Mudar pra esse plano"}
             </button>
           </div>
         ))}

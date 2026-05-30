@@ -65,27 +65,6 @@ function Billing() {
         subtitle="Pagamento em reais, NF-e emitida automaticamente. Cancelamento na hora."
       />
 
-      <div className="mb-8 rounded-2xl border border-border bg-background p-6">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <div className="text-xs uppercase tracking-widest text-muted-foreground">
-              Plano atual
-            </div>
-            <div className="mt-1 text-2xl font-semibold tracking-tight">Starter · R$ 150/mês</div>
-            <div className="mt-1 text-sm text-muted-foreground">
-              34 de 50 perguntas usadas hoje · renova em 6h
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="hidden h-2 w-48 overflow-hidden rounded-full bg-secondary md:block">
-              <div className="h-full bg-foreground" style={{ width: "68%" }} />
-            </div>
-            <button className="h-9 rounded-lg bg-foreground px-4 text-sm font-medium text-background">
-              Mudar plano
-            </button>
-          </div>
-        </div>
-      </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {PLANS.map((p) => (

@@ -42,7 +42,7 @@ export const getPendingInvitations = createServerFn({ method: "GET" })
     const { data: profile } = await supabaseAdmin
       .from("profiles")
       .select("email")
-      .eq("user_id", userId)
+      .eq("id", userId)
       .single();
     const email = profile?.email;
     if (!email) return { invitations: [] };

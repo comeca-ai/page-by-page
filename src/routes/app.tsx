@@ -1,6 +1,7 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { AppShell } from "@/components/app/AppShell";
 import { supabase } from "@/integrations/supabase/client";
+import { getUserAgencies } from "@/lib/agency.functions";
 
 export const Route = createFileRoute("/app")({
   head: () => ({ meta: [{ title: "Painel — Mencio" }] }),

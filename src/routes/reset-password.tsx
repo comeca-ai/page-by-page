@@ -1,6 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { Check, Eye, EyeOff } from "lucide-react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect, useMemo, useState } from "react";
+import { Check, Eye, EyeOff, Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/reset-password")({
   head: () => ({
@@ -13,9 +15,24 @@ export const Route = createFileRoute("/reset-password")({
 });
 
 function ResetPasswordPage() {
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [showPwd, setShowPwd] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [ready, setReady] = useState(false);
+
+  // Supabase puts the recovery token in the URL hash and the SDK picks it up
+  // via onAuthStateChange("PASSWORD_RECOVERY"). We just wait for a session.
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "PASSWORD_RECOVERY" || event === "SIGNED_IN") setReady(true);
+    });
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session) setReady(true);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
 
   const rules = useMemo(
     () => [
@@ -29,6 +46,19 @@ function ResetPasswordPage() {
 
   const allOk = rules.every((r) => r.ok);
 
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    const { error } = await supabase.auth.updateUser({ password });
+    setLoading(false);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    toast.success("Senha atualizada");
+    navigate({ to: "/app" });
+  }
+
   return (
     <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
       <div className="flex flex-col px-6 py-10 md:px-16">
@@ -38,16 +68,12 @@ function ResetPasswordPage() {
         </Link>
 
         <div className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-          >
-            <h1 className="text-3xl font-semibold tracking-tight">
-              Crie sua nova senha
-            </h1>
+          <form onSubmit={handleSubmit}>
+            <h1 className="text-3xl font-semibold tracking-tight">Crie sua nova senha</h1>
             <p className="mt-2 text-sm text-muted-foreground">
-              Quase lá. Escolha algo forte que você consiga lembrar.
+              {ready
+                ? "Quase lá. Escolha algo forte que você consiga lembrar."
+                : "Abra esta página pelo link enviado no seu e-mail."}
             </p>
 
             <label className="mt-8 block text-sm font-medium">Nova senha</label>
@@ -70,9 +96,7 @@ function ResetPasswordPage() {
               </button>
             </div>
 
-            <label className="mt-5 block text-sm font-medium">
-              Confirme a nova senha
-            </label>
+            <label className="mt-5 block text-sm font-medium">Confirme a nova senha</label>
             <input
               type={showPwd ? "text" : "password"}
               required
@@ -87,36 +111,26 @@ function ResetPasswordPage() {
                 <li key={r.label} className="flex items-center gap-2 text-xs">
                   <span
                     className={`flex h-4 w-4 items-center justify-center rounded-full transition-colors ${
-                      r.ok
-                        ? "bg-foreground text-background"
-                        : "border border-border bg-background"
+                      r.ok ? "bg-foreground text-background" : "border border-border bg-background"
                     }`}
                   >
                     {r.ok && <Check className="h-3 w-3" />}
                   </span>
-                  <span
-                    className={
-                      r.ok ? "text-foreground" : "text-muted-foreground"
-                    }
-                  >
-                    {r.label}
-                  </span>
+                  <span className={r.ok ? "text-foreground" : "text-muted-foreground"}>{r.label}</span>
                 </li>
               ))}
             </ul>
 
             <button
               type="submit"
-              disabled={!allOk}
-              className="mt-7 inline-flex h-11 w-full items-center justify-center rounded-lg bg-foreground text-sm font-medium text-background transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+              disabled={!allOk || !ready || loading}
+              className="mt-7 inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-foreground text-sm font-medium text-background transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
             >
+              {loading && <Loader2 className="h-4 w-4 animate-spin" />}
               Salvar nova senha
             </button>
 
-            <Link
-              to="/login"
-              className="mt-6 inline-block text-sm text-muted-foreground hover:text-foreground"
-            >
+            <Link to="/login" className="mt-6 inline-block text-sm text-muted-foreground hover:text-foreground">
               ← Voltar pro login
             </Link>
           </form>
@@ -139,29 +153,11 @@ function ResetPasswordPage() {
         <div className="relative flex h-full items-center justify-center p-12">
           <div className="max-w-md space-y-6">
             <div className="rounded-2xl border border-border bg-background p-6 shadow-sm">
-              <div className="text-xs uppercase tracking-widest text-muted-foreground">
-                Segurança Mencio
-              </div>
-              <div className="mt-2 text-xl font-semibold tracking-tight">
-                Sua senha nunca é vista por ninguém
-              </div>
+              <div className="text-xs uppercase tracking-widest text-muted-foreground">Segurança Mencio</div>
+              <div className="mt-2 text-xl font-semibold tracking-tight">Sua senha nunca é vista por ninguém</div>
               <p className="mt-2 text-sm text-muted-foreground">
-                Armazenamos só um hash criptográfico. Nem o nosso time
-                consegue ler.
+                Armazenamos só um hash criptográfico. Nem o nosso time consegue ler.
               </p>
-            </div>
-            <div className="rounded-2xl border border-border bg-background p-6 shadow-sm">
-              <p className="text-sm leading-relaxed">
-                “A Mencio leva privacidade a sério — dá pra sentir isso em
-                cada detalhe do produto.”
-              </p>
-              <div className="mt-4 flex items-center gap-3">
-                <div className="h-9 w-9 rounded-full bg-foreground/10" />
-                <div className="text-xs">
-                  <div className="font-medium">Camila Reis</div>
-                  <div className="text-muted-foreground">CTO, Osklen</div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "@/components/app/AppShell";
-import { Check, Download } from "lucide-react";
+import { Check, Download, X } from "lucide-react";
 
 export const Route = createFileRoute("/app/billing")({
   head: () => ({ meta: [{ title: "Plano e cobrança — Mencio" }] }),
@@ -9,36 +9,45 @@ export const Route = createFileRoute("/app/billing")({
 
 const PLANS = [
   {
-    name: "Beta",
-    price: "Grátis",
-    sub: "enquanto durar",
-    features: ["25 perguntas/dia", "5 modelos de IA", "1 marca", "Suporte por e-mail"],
+    name: "Starter",
+    price: "R$ 150",
+    sub: "/mês",
+    description: "Pra quem tá começando a monitorar a marca nas IAs.",
+    features: ["1 marca", "50 perguntas/dia", "3 modelos de IA", "Relatórios semanais"],
+    pros: ["Barato pra validar", "Setup em 5 minutos", "Cancela quando quiser"],
+    cons: ["Sem alertas em tempo real", "Sem comparação com concorrentes", "Suporte só por e-mail"],
     current: true,
   },
   {
     name: "Crescimento",
-    price: "R$ 490",
+    price: "R$ 390",
     sub: "/mês",
+    description: "Pra marcas que querem dominar as respostas das IAs.",
     features: [
-      "150 perguntas/dia",
-      "Todos os modelos",
       "Até 3 marcas",
+      "200 perguntas/dia",
+      "Todos os modelos de IA",
       "Alertas em tempo real",
-      "Suporte prioritário",
+      "Análise de concorrentes",
     ],
+    pros: ["Melhor custo-benefício", "Alertas instantâneos", "Suporte prioritário"],
+    cons: ["Limite de 3 marcas", "Sem API pública", "Sem white-label"],
     highlight: true,
   },
   {
     name: "Agência",
-    price: "Sob consulta",
-    sub: "fale com a gente",
+    price: "R$ 990",
+    sub: "/mês",
+    description: "Pra agências e times que gerenciam várias marcas.",
     features: [
-      "Perguntas ilimitadas",
       "Marcas ilimitadas",
-      "Workspaces por cliente",
+      "Perguntas ilimitadas",
       "API e webhooks",
+      "Workspaces por cliente",
       "Gerente de conta dedicado",
     ],
+    pros: ["Escala sem teto", "API e integrações", "White-label disponível"],
+    cons: ["Preço mais alto", "Exige onboarding técnico", "Compromisso mínimo de 3 meses"],
   },
 ];
 
@@ -62,9 +71,9 @@ function Billing() {
             <div className="text-xs uppercase tracking-widest text-muted-foreground">
               Plano atual
             </div>
-            <div className="mt-1 text-2xl font-semibold tracking-tight">Beta · Grátis</div>
+            <div className="mt-1 text-2xl font-semibold tracking-tight">Starter · R$ 150/mês</div>
             <div className="mt-1 text-sm text-muted-foreground">
-              17 de 25 perguntas usadas hoje · renova em 6h
+              34 de 50 perguntas usadas hoje · renova em 6h
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -102,6 +111,9 @@ function Billing() {
                 {p.sub}
               </span>
             </div>
+            <p className={`mt-3 text-sm ${p.highlight ? "opacity-80" : "text-muted-foreground"}`}>
+              {p.description}
+            </p>
             <ul className="mt-5 space-y-2.5 text-sm">
               {p.features.map((f) => (
                 <li key={f} className="flex items-start gap-2">
@@ -110,6 +122,45 @@ function Billing() {
                 </li>
               ))}
             </ul>
+
+            <div className="mt-5 grid grid-cols-2 gap-3 border-t border-border/40 pt-4">
+              <div>
+                <div
+                  className={`mb-2 text-[10px] font-medium uppercase tracking-wider ${
+                    p.highlight ? "opacity-70" : "text-muted-foreground"
+                  }`}
+                >
+                  Prós
+                </div>
+                <ul className="space-y-1.5 text-xs">
+                  {p.pros.map((pro) => (
+                    <li key={pro} className="flex items-start gap-1.5">
+                      <Check className="mt-0.5 h-3 w-3 flex-none text-emerald-500" />
+                      <span className={p.highlight ? "opacity-90" : ""}>{pro}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <div
+                  className={`mb-2 text-[10px] font-medium uppercase tracking-wider ${
+                    p.highlight ? "opacity-70" : "text-muted-foreground"
+                  }`}
+                >
+                  Contras
+                </div>
+                <ul className="space-y-1.5 text-xs">
+                  {p.cons.map((con) => (
+                    <li key={con} className="flex items-start gap-1.5">
+                      <X className="mt-0.5 h-3 w-3 flex-none text-rose-500" />
+                      <span className={p.highlight ? "opacity-80" : "text-muted-foreground"}>
+                        {con}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
             <button
               className={`mt-6 h-10 w-full rounded-lg text-sm font-medium ${
                 p.highlight
@@ -120,7 +171,7 @@ function Billing() {
               }`}
               disabled={p.current}
             >
-              {p.current ? "Plano atual" : p.name === "Agência" ? "Falar com vendas" : "Assinar"}
+              {p.current ? "Plano atual" : "Mudar pra esse plano"}
             </button>
           </div>
         ))}

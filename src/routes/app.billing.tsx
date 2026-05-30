@@ -111,6 +111,9 @@ function Billing() {
                 {p.sub}
               </span>
             </div>
+            <p className={`mt-3 text-sm ${p.highlight ? "opacity-80" : "text-muted-foreground"}`}>
+              {p.description}
+            </p>
             <ul className="mt-5 space-y-2.5 text-sm">
               {p.features.map((f) => (
                 <li key={f} className="flex items-start gap-2">
@@ -119,6 +122,45 @@ function Billing() {
                 </li>
               ))}
             </ul>
+
+            <div className="mt-5 grid grid-cols-2 gap-3 border-t border-border/40 pt-4">
+              <div>
+                <div
+                  className={`mb-2 text-[10px] font-medium uppercase tracking-wider ${
+                    p.highlight ? "opacity-70" : "text-muted-foreground"
+                  }`}
+                >
+                  Prós
+                </div>
+                <ul className="space-y-1.5 text-xs">
+                  {p.pros.map((pro) => (
+                    <li key={pro} className="flex items-start gap-1.5">
+                      <Check className="mt-0.5 h-3 w-3 flex-none text-emerald-500" />
+                      <span className={p.highlight ? "opacity-90" : ""}>{pro}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <div
+                  className={`mb-2 text-[10px] font-medium uppercase tracking-wider ${
+                    p.highlight ? "opacity-70" : "text-muted-foreground"
+                  }`}
+                >
+                  Contras
+                </div>
+                <ul className="space-y-1.5 text-xs">
+                  {p.cons.map((con) => (
+                    <li key={con} className="flex items-start gap-1.5">
+                      <X className="mt-0.5 h-3 w-3 flex-none text-rose-500" />
+                      <span className={p.highlight ? "opacity-80" : "text-muted-foreground"}>
+                        {con}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
             <button
               className={`mt-6 h-10 w-full rounded-lg text-sm font-medium ${
                 p.highlight

@@ -33,6 +33,7 @@ import { Route as AppCompetitorsRouteImport } from './routes/app.competitors'
 import { Route as AppBillingRouteImport } from './routes/app.billing'
 import { Route as AppAlertsRouteImport } from './routes/app.alerts'
 import { Route as AppPromptsPromptIdRouteImport } from './routes/app.prompts.$promptId'
+import { Route as AppASlugRouteImport } from './routes/app.a.$slug'
 
 const VerifyEmailRoute = VerifyEmailRouteImport.update({
   id: '/verify-email',
@@ -154,6 +155,11 @@ const AppPromptsPromptIdRoute = AppPromptsPromptIdRouteImport.update({
   path: '/$promptId',
   getParentRoute: () => AppPromptsRoute,
 } as any)
+const AppASlugRoute = AppASlugRouteImport.update({
+  id: '/a/$slug',
+  path: '/a/$slug',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -179,6 +185,7 @@ export interface FileRoutesByFullPath {
   '/onboarding/prompts': typeof OnboardingPromptsRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
   '/app/': typeof AppIndexRoute
+  '/app/a/$slug': typeof AppASlugRoute
   '/app/prompts/$promptId': typeof AppPromptsPromptIdRoute
 }
 export interface FileRoutesByTo {
@@ -204,6 +211,7 @@ export interface FileRoutesByTo {
   '/onboarding/prompts': typeof OnboardingPromptsRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
   '/app': typeof AppIndexRoute
+  '/app/a/$slug': typeof AppASlugRoute
   '/app/prompts/$promptId': typeof AppPromptsPromptIdRoute
 }
 export interface FileRoutesById {
@@ -231,6 +239,7 @@ export interface FileRoutesById {
   '/onboarding/prompts': typeof OnboardingPromptsRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
   '/app/': typeof AppIndexRoute
+  '/app/a/$slug': typeof AppASlugRoute
   '/app/prompts/$promptId': typeof AppPromptsPromptIdRoute
 }
 export interface FileRouteTypes {
@@ -259,6 +268,7 @@ export interface FileRouteTypes {
     | '/onboarding/prompts'
     | '/onboarding/topics'
     | '/app/'
+    | '/app/a/$slug'
     | '/app/prompts/$promptId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -284,6 +294,7 @@ export interface FileRouteTypes {
     | '/onboarding/prompts'
     | '/onboarding/topics'
     | '/app'
+    | '/app/a/$slug'
     | '/app/prompts/$promptId'
   id:
     | '__root__'
@@ -310,6 +321,7 @@ export interface FileRouteTypes {
     | '/onboarding/prompts'
     | '/onboarding/topics'
     | '/app/'
+    | '/app/a/$slug'
     | '/app/prompts/$promptId'
   fileRoutesById: FileRoutesById
 }
@@ -500,6 +512,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppPromptsPromptIdRouteImport
       parentRoute: typeof AppPromptsRoute
     }
+    '/app/a/$slug': {
+      id: '/app/a/$slug'
+      path: '/a/$slug'
+      fullPath: '/app/a/$slug'
+      preLoaderRoute: typeof AppASlugRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
@@ -525,6 +544,7 @@ interface AppRouteChildren {
   AppSettingsRoute: typeof AppSettingsRoute
   AppTeamRoute: typeof AppTeamRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppASlugRoute: typeof AppASlugRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
@@ -537,6 +557,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppSettingsRoute: AppSettingsRoute,
   AppTeamRoute: AppTeamRoute,
   AppIndexRoute: AppIndexRoute,
+  AppASlugRoute: AppASlugRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)

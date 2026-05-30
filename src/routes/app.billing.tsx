@@ -63,6 +63,7 @@ function Billing() {
       <PageHeader
         title="Plano e cobrança"
         subtitle="Pagamento em reais, NF-e emitida automaticamente. Cancelamento na hora."
+        centered
       />
 
 

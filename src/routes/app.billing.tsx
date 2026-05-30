@@ -71,9 +71,9 @@ function Billing() {
             <div className="text-xs uppercase tracking-widest text-muted-foreground">
               Plano atual
             </div>
-            <div className="mt-1 text-2xl font-semibold tracking-tight">Beta · Grátis</div>
+            <div className="mt-1 text-2xl font-semibold tracking-tight">Starter · R$ 150/mês</div>
             <div className="mt-1 text-sm text-muted-foreground">
-              17 de 25 perguntas usadas hoje · renova em 6h
+              34 de 50 perguntas usadas hoje · renova em 6h
             </div>
           </div>
           <div className="flex items-center gap-3">

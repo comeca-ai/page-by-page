@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/forgot-password")({
+  ssr: false,
   head: () => ({
     meta: [
       { title: "Recuperar senha — Mencio" },

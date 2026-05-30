@@ -131,3 +131,47 @@ export function PageHeader({
     </div>
   );
 }
+
+function AgencySwitcher() {
+  const navigate = useNavigate();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const fetchAgencies = useServerFn(getUserAgencies);
+  const { data } = useQuery({ queryKey: ["user-agencies"], queryFn: fetchAgencies });
+  const agencies = data?.agencies ?? [];
+  const match = pathname.match(/^\/app\/a\/([^/]+)/);
+  const currentSlug = match?.[1];
+  const current = agencies.find((a: any) => a.slug === currentSlug) ?? agencies[0];
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger className="mx-4 mt-4 flex items-center justify-between rounded-lg border border-border bg-background px-3 py-2 text-left text-sm hover:border-foreground/40">
+        <div className="flex items-center gap-2 min-w-0">
+          <div className="h-6 w-6 flex-none rounded bg-foreground/10" />
+          <div className="leading-tight min-w-0">
+            <div className="font-medium truncate">{current?.name ?? "Selecionar agência"}</div>
+            <div className="text-[10px] text-muted-foreground truncate">
+              {current ? `Cargo: ${current.role}` : "Nenhuma agência"}
+            </div>
+          </div>
+        </div>
+        <ChevronDown className="h-4 w-4 flex-none text-muted-foreground" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start" className="w-56">
+        <DropdownMenuLabel>Suas agências</DropdownMenuLabel>
+        {agencies.map((a: any) => (
+          <DropdownMenuItem
+            key={a.id}
+            onClick={() => navigate({ to: "/app/a/$slug", params: { slug: a.slug } })}
+          >
+            <span className="truncate">{a.name}</span>
+            {a.slug === current?.slug && <Check className="ml-auto h-4 w-4" />}
+          </DropdownMenuItem>
+        ))}
+        {agencies.length > 0 && <DropdownMenuSeparator />}
+        <DropdownMenuItem onClick={() => navigate({ to: "/app/onboarding" })}>
+          <Plus className="mr-2 h-4 w-4" /> Nova agência
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}

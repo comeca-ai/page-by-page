@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "@/components/app/AppShell";
-import { Check, Download, X } from "lucide-react";
+import { Check, X } from "lucide-react";
 
 export const Route = createFileRoute("/app/billing")({
   head: () => ({ meta: [{ title: "Plano e cobrança — Mencio" }] }),
@@ -51,11 +51,6 @@ const PLANS = [
   },
 ];
 
-const INVOICES = [
-  { id: "INV-2026-005", date: "01 mai 2026", value: "R$ 0,00", status: "Beta" },
-  { id: "INV-2026-004", date: "01 abr 2026", value: "R$ 0,00", status: "Beta" },
-  { id: "INV-2026-003", date: "01 mar 2026", value: "R$ 0,00", status: "Beta" },
-];
 
 function Billing() {
   return (
@@ -157,46 +152,6 @@ function Billing() {
         ))}
       </div>
 
-      <div className="mt-10">
-        <div className="mb-3 flex items-center justify-between">
-          <div className="text-base font-semibold">Faturas</div>
-          <button className="text-xs text-muted-foreground hover:text-foreground">
-            Baixar todas
-          </button>
-        </div>
-        <div className="overflow-hidden rounded-2xl border border-border bg-background">
-          <table className="w-full text-sm">
-            <thead className="bg-secondary/40 text-xs uppercase tracking-wide text-muted-foreground">
-              <tr>
-                <th className="px-5 py-3 text-left font-medium">Fatura</th>
-                <th className="px-5 py-3 text-left font-medium">Data</th>
-                <th className="px-5 py-3 text-left font-medium">Valor</th>
-                <th className="px-5 py-3 text-left font-medium">Status</th>
-                <th className="px-5 py-3" />
-              </tr>
-            </thead>
-            <tbody>
-              {INVOICES.map((inv) => (
-                <tr key={inv.id} className="border-t border-border">
-                  <td className="px-5 py-4 font-medium">{inv.id}</td>
-                  <td className="px-5 py-4 text-muted-foreground">{inv.date}</td>
-                  <td className="px-5 py-4">{inv.value}</td>
-                  <td className="px-5 py-4">
-                    <span className="rounded-full bg-secondary px-2 py-0.5 text-xs">
-                      {inv.status}
-                    </span>
-                  </td>
-                  <td className="px-5 py-4 text-right">
-                    <button className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground">
-                      <Download className="h-3.5 w-3.5" /> PDF
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
     </>
   );
 }

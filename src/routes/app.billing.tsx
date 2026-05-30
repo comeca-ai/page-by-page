@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "@/components/app/AppShell";
-import { Check, Download } from "lucide-react";
+import { Check, Download, X } from "lucide-react";
 
 export const Route = createFileRoute("/app/billing")({
   head: () => ({ meta: [{ title: "Plano e cobrança — Mencio" }] }),

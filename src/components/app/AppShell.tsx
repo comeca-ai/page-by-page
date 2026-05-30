@@ -1,5 +1,8 @@
-import { Link, Outlet, useRouterState } from "@tanstack/react-router";
+import { Link, Outlet, useRouterState, useNavigate } from "@tanstack/react-router";
 import type { ReactNode } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { getUserAgencies } from "@/lib/agency.functions";
 import {
   LayoutDashboard,
   MessageSquareQuote,
@@ -11,7 +14,17 @@ import {
   ChevronDown,
   UserPlus,
   CreditCard,
+  Plus,
+  Check,
 } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const NAV: Array<{ to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean }> = [
   { to: "/app", label: "Visão geral", icon: LayoutDashboard, exact: true },
@@ -36,16 +49,8 @@ export function AppShell({ children }: { children?: ReactNode }) {
           <span className="text-base font-semibold tracking-tight">Mencio</span>
         </div>
 
-        <button className="mx-4 mt-4 flex items-center justify-between rounded-lg border border-border bg-background px-3 py-2 text-left text-sm hover:border-foreground/40">
-          <div className="flex items-center gap-2">
-            <div className="h-6 w-6 rounded bg-foreground/10" />
-            <div className="leading-tight">
-              <div className="font-medium">suamarca.com.br</div>
-              <div className="text-[10px] text-muted-foreground">Marca atual</div>
-            </div>
-          </div>
-          <ChevronDown className="h-4 w-4 text-muted-foreground" />
-        </button>
+        <AgencySwitcher />
+
 
         <nav className="mt-5 flex-1 px-3">
           {NAV.map((item) => {
@@ -124,5 +129,49 @@ export function PageHeader({
       </div>
       {actions}
     </div>
+  );
+}
+
+function AgencySwitcher() {
+  const navigate = useNavigate();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const fetchAgencies = useServerFn(getUserAgencies);
+  const { data } = useQuery({ queryKey: ["user-agencies"], queryFn: fetchAgencies });
+  const agencies = data?.agencies ?? [];
+  const match = pathname.match(/^\/app\/a\/([^/]+)/);
+  const currentSlug = match?.[1];
+  const current = agencies.find((a: any) => a.slug === currentSlug) ?? agencies[0];
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger className="mx-4 mt-4 flex items-center justify-between rounded-lg border border-border bg-background px-3 py-2 text-left text-sm hover:border-foreground/40">
+        <div className="flex items-center gap-2 min-w-0">
+          <div className="h-6 w-6 flex-none rounded bg-foreground/10" />
+          <div className="leading-tight min-w-0">
+            <div className="font-medium truncate">{current?.name ?? "Selecionar agência"}</div>
+            <div className="text-[10px] text-muted-foreground truncate">
+              {current ? `Cargo: ${current.role}` : "Nenhuma agência"}
+            </div>
+          </div>
+        </div>
+        <ChevronDown className="h-4 w-4 flex-none text-muted-foreground" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start" className="w-56">
+        <DropdownMenuLabel>Suas agências</DropdownMenuLabel>
+        {agencies.map((a: any) => (
+          <DropdownMenuItem
+            key={a.id}
+            onClick={() => navigate({ to: "/app/a/$slug", params: { slug: a.slug } })}
+          >
+            <span className="truncate">{a.name}</span>
+            {a.slug === current?.slug && <Check className="ml-auto h-4 w-4" />}
+          </DropdownMenuItem>
+        ))}
+        {agencies.length > 0 && <DropdownMenuSeparator />}
+        <DropdownMenuItem onClick={() => navigate({ to: "/app/onboarding" })}>
+          <Plus className="mr-2 h-4 w-4" /> Nova agência
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

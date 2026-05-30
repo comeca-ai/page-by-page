@@ -27,6 +27,7 @@ import { Route as OnboardingAnalyzingRouteImport } from './routes/onboarding.ana
 import { Route as AppTeamRouteImport } from './routes/app.team'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as AppPromptsRouteImport } from './routes/app.prompts'
+import { Route as AppOnboardingRouteImport } from './routes/app.onboarding'
 import { Route as AppMentionsRouteImport } from './routes/app.mentions'
 import { Route as AppCompetitorsRouteImport } from './routes/app.competitors'
 import { Route as AppBillingRouteImport } from './routes/app.billing'
@@ -123,6 +124,11 @@ const AppPromptsRoute = AppPromptsRouteImport.update({
   path: '/prompts',
   getParentRoute: () => AppRoute,
 } as any)
+const AppOnboardingRoute = AppOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppMentionsRoute = AppMentionsRouteImport.update({
   id: '/mentions',
   path: '/mentions',
@@ -162,6 +168,7 @@ export interface FileRoutesByFullPath {
   '/app/billing': typeof AppBillingRoute
   '/app/competitors': typeof AppCompetitorsRoute
   '/app/mentions': typeof AppMentionsRoute
+  '/app/onboarding': typeof AppOnboardingRoute
   '/app/prompts': typeof AppPromptsRouteWithChildren
   '/app/settings': typeof AppSettingsRoute
   '/app/team': typeof AppTeamRoute
@@ -186,6 +193,7 @@ export interface FileRoutesByTo {
   '/app/billing': typeof AppBillingRoute
   '/app/competitors': typeof AppCompetitorsRoute
   '/app/mentions': typeof AppMentionsRoute
+  '/app/onboarding': typeof AppOnboardingRoute
   '/app/prompts': typeof AppPromptsRouteWithChildren
   '/app/settings': typeof AppSettingsRoute
   '/app/team': typeof AppTeamRoute
@@ -212,6 +220,7 @@ export interface FileRoutesById {
   '/app/billing': typeof AppBillingRoute
   '/app/competitors': typeof AppCompetitorsRoute
   '/app/mentions': typeof AppMentionsRoute
+  '/app/onboarding': typeof AppOnboardingRoute
   '/app/prompts': typeof AppPromptsRouteWithChildren
   '/app/settings': typeof AppSettingsRoute
   '/app/team': typeof AppTeamRoute
@@ -239,6 +248,7 @@ export interface FileRouteTypes {
     | '/app/billing'
     | '/app/competitors'
     | '/app/mentions'
+    | '/app/onboarding'
     | '/app/prompts'
     | '/app/settings'
     | '/app/team'
@@ -263,6 +273,7 @@ export interface FileRouteTypes {
     | '/app/billing'
     | '/app/competitors'
     | '/app/mentions'
+    | '/app/onboarding'
     | '/app/prompts'
     | '/app/settings'
     | '/app/team'
@@ -288,6 +299,7 @@ export interface FileRouteTypes {
     | '/app/billing'
     | '/app/competitors'
     | '/app/mentions'
+    | '/app/onboarding'
     | '/app/prompts'
     | '/app/settings'
     | '/app/team'
@@ -446,6 +458,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppPromptsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/onboarding': {
+      id: '/app/onboarding'
+      path: '/onboarding'
+      fullPath: '/app/onboarding'
+      preLoaderRoute: typeof AppOnboardingRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/mentions': {
       id: '/app/mentions'
       path: '/mentions'
@@ -501,6 +520,7 @@ interface AppRouteChildren {
   AppBillingRoute: typeof AppBillingRoute
   AppCompetitorsRoute: typeof AppCompetitorsRoute
   AppMentionsRoute: typeof AppMentionsRoute
+  AppOnboardingRoute: typeof AppOnboardingRoute
   AppPromptsRoute: typeof AppPromptsRouteWithChildren
   AppSettingsRoute: typeof AppSettingsRoute
   AppTeamRoute: typeof AppTeamRoute
@@ -512,6 +532,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppBillingRoute: AppBillingRoute,
   AppCompetitorsRoute: AppCompetitorsRoute,
   AppMentionsRoute: AppMentionsRoute,
+  AppOnboardingRoute: AppOnboardingRoute,
   AppPromptsRoute: AppPromptsRouteWithChildren,
   AppSettingsRoute: AppSettingsRoute,
   AppTeamRoute: AppTeamRoute,

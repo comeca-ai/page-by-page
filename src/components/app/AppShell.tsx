@@ -1,5 +1,8 @@
-import { Link, Outlet, useRouterState } from "@tanstack/react-router";
+import { Link, Outlet, useRouterState, useNavigate } from "@tanstack/react-router";
 import type { ReactNode } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { getUserAgencies } from "@/lib/agency.functions";
 import {
   LayoutDashboard,
   MessageSquareQuote,
@@ -11,7 +14,17 @@ import {
   ChevronDown,
   UserPlus,
   CreditCard,
+  Plus,
+  Check,
 } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const NAV: Array<{ to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean }> = [
   { to: "/app", label: "Visão geral", icon: LayoutDashboard, exact: true },

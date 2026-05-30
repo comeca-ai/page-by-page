@@ -49,16 +49,8 @@ export function AppShell({ children }: { children?: ReactNode }) {
           <span className="text-base font-semibold tracking-tight">Mencio</span>
         </div>
 
-        <button className="mx-4 mt-4 flex items-center justify-between rounded-lg border border-border bg-background px-3 py-2 text-left text-sm hover:border-foreground/40">
-          <div className="flex items-center gap-2">
-            <div className="h-6 w-6 rounded bg-foreground/10" />
-            <div className="leading-tight">
-              <div className="font-medium">suamarca.com.br</div>
-              <div className="text-[10px] text-muted-foreground">Marca atual</div>
-            </div>
-          </div>
-          <ChevronDown className="h-4 w-4 text-muted-foreground" />
-        </button>
+        <AgencySwitcher />
+
 
         <nav className="mt-5 flex-1 px-3">
           {NAV.map((item) => {

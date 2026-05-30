@@ -34,7 +34,7 @@ function Landing() {
           <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
             <a href="#produto" className="hover:text-foreground">Produto</a>
             <a href="#como-funciona" className="hover:text-foreground">Como funciona</a>
-            <a href="#precos" className="hover:text-foreground">Preços</a>
+            <Link to="/pricing" className="hover:text-foreground">Preços</Link>
           </nav>
           <div className="flex items-center gap-3">
             <Link

@@ -111,7 +111,7 @@ function TopicsStep() {
       </ul>
 
       <button
-        onClick={() => navigate({ to: "/onboarding/prompts" })}
+        onClick={() => navigate({ to: "/onboarding/region" })}
         disabled={selected.length === 0}
         className="mt-7 inline-flex h-11 w-full items-center justify-center rounded-lg bg-foreground text-sm font-medium text-background transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
       >

@@ -70,7 +70,7 @@ function PlanStep() {
 
   return (
     <OnboardingShell
-      step={7}
+      step={8}
       back={{ to: "/onboarding/prompts" }}
       aside={
         <div className="rounded-2xl border border-border bg-background p-6 shadow-sm">

@@ -52,15 +52,33 @@ const PLANS = [
 ];
 
 
+const INVOICES = [
+  { date: "01 Mai 2026", amount: "R$ 150,00", status: "Pago", id: "INV-2026-005" },
+  { date: "01 Abr 2026", amount: "R$ 150,00", status: "Pago", id: "INV-2026-004" },
+  { date: "01 Mar 2026", amount: "R$ 150,00", status: "Pago", id: "INV-2026-003" },
+];
+
 function Billing() {
   return (
     <>
       <PageHeader
         title="Plano e cobrança"
         subtitle="Pagamento em reais, NF-e emitida automaticamente. Cancelamento na hora."
-        centered
       />
 
+      {/* Usage */}
+      <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+        <UsageCard label="Perguntas hoje" used={32} total={50} hint="Reseta em 6h" />
+        <UsageCard label="Marcas ativas" used={1} total={1} hint="Starter limita a 1 marca" />
+        <UsageCard label="Modelos monitorados" used={3} total={3} hint="ChatGPT, Gemini, Perplexity" />
+      </div>
+
+      <div className="mb-4 text-center">
+        <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+          Planos
+        </div>
+        <h2 className="mt-2 text-2xl font-semibold tracking-tight">Escolha o seu</h2>
+      </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {PLANS.map((p) => (

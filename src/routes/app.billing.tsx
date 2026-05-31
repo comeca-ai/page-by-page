@@ -170,6 +170,79 @@ function Billing() {
         ))}
       </div>
 
+      {/* Invoices */}
+      <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-background">
+        <div className="flex items-center justify-between border-b border-border px-5 py-4">
+          <div>
+            <div className="text-sm font-semibold">Faturas</div>
+            <div className="text-xs text-muted-foreground">Histórico dos últimos pagamentos</div>
+          </div>
+          <button className="text-xs text-muted-foreground hover:text-foreground">
+            Ver todas →
+          </button>
+        </div>
+        <table className="w-full text-sm">
+          <thead className="bg-secondary/40 text-xs uppercase tracking-wide text-muted-foreground">
+            <tr>
+              <th className="px-5 py-3 text-left font-medium">Data</th>
+              <th className="px-5 py-3 text-left font-medium">ID</th>
+              <th className="px-5 py-3 text-left font-medium">Valor</th>
+              <th className="px-5 py-3 text-left font-medium">Status</th>
+              <th className="w-20 px-5 py-3" />
+            </tr>
+          </thead>
+          <tbody>
+            {INVOICES.map((inv) => (
+              <tr key={inv.id} className="border-t border-border">
+                <td className="px-5 py-3">{inv.date}</td>
+                <td className="px-5 py-3 font-['JetBrains_Mono'] text-xs text-muted-foreground">
+                  {inv.id}
+                </td>
+                <td className="px-5 py-3 font-medium tabular-nums">{inv.amount}</td>
+                <td className="px-5 py-3">
+                  <span className="inline-flex h-6 items-center rounded-full bg-foreground px-2.5 text-xs font-medium text-background">
+                    {inv.status}
+                  </span>
+                </td>
+                <td className="px-5 py-3 text-right">
+                  <button className="text-xs text-muted-foreground hover:text-foreground">
+                    Baixar PDF
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }
+
+function UsageCard({
+  label,
+  used,
+  total,
+  hint,
+}: {
+  label: string;
+  used: number;
+  total: number;
+  hint: string;
+}) {
+  const pct = Math.min(100, Math.round((used / total) * 100));
+  return (
+    <div className="rounded-2xl border border-border bg-background p-5">
+      <div className="flex items-baseline justify-between">
+        <div className="text-xs uppercase tracking-wider text-muted-foreground">{label}</div>
+        <div className="text-xs tabular-nums text-muted-foreground">
+          {used} / {total}
+        </div>
+      </div>
+      <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-secondary">
+        <div className="h-full bg-foreground" style={{ width: `${pct}%` }} />
+      </div>
+      <div className="mt-2 text-xs text-muted-foreground">{hint}</div>
+    </div>
+  );
+}
+

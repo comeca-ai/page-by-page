@@ -10,13 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VerifyEmailRouteImport } from './routes/verify-email'
+import { Route as TeamRouteImport } from './routes/team'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as PromptsRouteImport } from './routes/prompts'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as MentionsRouteImport } from './routes/mentions'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as CompetitorsRouteImport } from './routes/competitors'
+import { Route as BillingRouteImport } from './routes/billing'
 import { Route as AppRouteImport } from './routes/app'
+import { Route as AlertsRouteImport } from './routes/alerts'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as OnboardingIndexRouteImport } from './routes/onboarding.index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as OnboardingTopicsRouteImport } from './routes/onboarding.topics'
 import { Route as OnboardingRegionRouteImport } from './routes/onboarding.region'
@@ -42,9 +51,19 @@ const VerifyEmailRoute = VerifyEmailRouteImport.update({
   path: '/verify-email',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeamRoute = TeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
@@ -52,9 +71,19 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PromptsRoute = PromptsRouteImport.update({
+  id: '/prompts',
+  path: '/prompts',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MentionsRoute = MentionsRouteImport.update({
+  id: '/mentions',
+  path: '/mentions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -67,14 +96,39 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompetitorsRoute = CompetitorsRouteImport.update({
+  id: '/competitors',
+  path: '/competitors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BillingRoute = BillingRouteImport.update({
+  id: '/billing',
+  path: '/billing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppRoute = AppRouteImport.update({
   id: '/app',
   path: '/app',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AlertsRoute = AlertsRouteImport.update({
+  id: '/alerts',
+  path: '/alerts',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingIndexRoute = OnboardingIndexRouteImport.update({
+  id: '/onboarding/',
+  path: '/onboarding/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppIndexRoute = AppIndexRouteImport.update({
@@ -175,12 +229,20 @@ const AppASlugRoute = AppASlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/alerts': typeof AlertsRoute
   '/app': typeof AppRouteWithChildren
+  '/billing': typeof BillingRoute
+  '/competitors': typeof CompetitorsRoute
+  '/dashboard': typeof DashboardRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
+  '/mentions': typeof MentionsRoute
   '/pricing': typeof PricingRoute
+  '/prompts': typeof PromptsRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
+  '/team': typeof TeamRoute
   '/verify-email': typeof VerifyEmailRoute
   '/app/alerts': typeof AppAlertsRoute
   '/app/billing': typeof AppBillingRoute
@@ -199,16 +261,25 @@ export interface FileRoutesByFullPath {
   '/onboarding/region': typeof OnboardingRegionRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
   '/app/': typeof AppIndexRoute
+  '/onboarding/': typeof OnboardingIndexRoute
   '/app/a/$slug': typeof AppASlugRoute
   '/app/prompts/$promptId': typeof AppPromptsPromptIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/alerts': typeof AlertsRoute
+  '/billing': typeof BillingRoute
+  '/competitors': typeof CompetitorsRoute
+  '/dashboard': typeof DashboardRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
+  '/mentions': typeof MentionsRoute
   '/pricing': typeof PricingRoute
+  '/prompts': typeof PromptsRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
+  '/team': typeof TeamRoute
   '/verify-email': typeof VerifyEmailRoute
   '/app/alerts': typeof AppAlertsRoute
   '/app/billing': typeof AppBillingRoute
@@ -227,18 +298,27 @@ export interface FileRoutesByTo {
   '/onboarding/region': typeof OnboardingRegionRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
   '/app': typeof AppIndexRoute
+  '/onboarding': typeof OnboardingIndexRoute
   '/app/a/$slug': typeof AppASlugRoute
   '/app/prompts/$promptId': typeof AppPromptsPromptIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/alerts': typeof AlertsRoute
   '/app': typeof AppRouteWithChildren
+  '/billing': typeof BillingRoute
+  '/competitors': typeof CompetitorsRoute
+  '/dashboard': typeof DashboardRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
+  '/mentions': typeof MentionsRoute
   '/pricing': typeof PricingRoute
+  '/prompts': typeof PromptsRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
+  '/team': typeof TeamRoute
   '/verify-email': typeof VerifyEmailRoute
   '/app/alerts': typeof AppAlertsRoute
   '/app/billing': typeof AppBillingRoute
@@ -257,6 +337,7 @@ export interface FileRoutesById {
   '/onboarding/region': typeof OnboardingRegionRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
   '/app/': typeof AppIndexRoute
+  '/onboarding/': typeof OnboardingIndexRoute
   '/app/a/$slug': typeof AppASlugRoute
   '/app/prompts/$promptId': typeof AppPromptsPromptIdRoute
 }
@@ -264,12 +345,20 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/alerts'
     | '/app'
+    | '/billing'
+    | '/competitors'
+    | '/dashboard'
     | '/forgot-password'
     | '/login'
+    | '/mentions'
     | '/pricing'
+    | '/prompts'
     | '/reset-password'
+    | '/settings'
     | '/signup'
+    | '/team'
     | '/verify-email'
     | '/app/alerts'
     | '/app/billing'
@@ -288,16 +377,25 @@ export interface FileRouteTypes {
     | '/onboarding/region'
     | '/onboarding/topics'
     | '/app/'
+    | '/onboarding/'
     | '/app/a/$slug'
     | '/app/prompts/$promptId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/alerts'
+    | '/billing'
+    | '/competitors'
+    | '/dashboard'
     | '/forgot-password'
     | '/login'
+    | '/mentions'
     | '/pricing'
+    | '/prompts'
     | '/reset-password'
+    | '/settings'
     | '/signup'
+    | '/team'
     | '/verify-email'
     | '/app/alerts'
     | '/app/billing'
@@ -316,17 +414,26 @@ export interface FileRouteTypes {
     | '/onboarding/region'
     | '/onboarding/topics'
     | '/app'
+    | '/onboarding'
     | '/app/a/$slug'
     | '/app/prompts/$promptId'
   id:
     | '__root__'
     | '/'
+    | '/alerts'
     | '/app'
+    | '/billing'
+    | '/competitors'
+    | '/dashboard'
     | '/forgot-password'
     | '/login'
+    | '/mentions'
     | '/pricing'
+    | '/prompts'
     | '/reset-password'
+    | '/settings'
     | '/signup'
+    | '/team'
     | '/verify-email'
     | '/app/alerts'
     | '/app/billing'
@@ -345,18 +452,27 @@ export interface FileRouteTypes {
     | '/onboarding/region'
     | '/onboarding/topics'
     | '/app/'
+    | '/onboarding/'
     | '/app/a/$slug'
     | '/app/prompts/$promptId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AlertsRoute: typeof AlertsRoute
   AppRoute: typeof AppRouteWithChildren
+  BillingRoute: typeof BillingRoute
+  CompetitorsRoute: typeof CompetitorsRoute
+  DashboardRoute: typeof DashboardRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
+  MentionsRoute: typeof MentionsRoute
   PricingRoute: typeof PricingRoute
+  PromptsRoute: typeof PromptsRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  SettingsRoute: typeof SettingsRoute
   SignupRoute: typeof SignupRoute
+  TeamRoute: typeof TeamRoute
   VerifyEmailRoute: typeof VerifyEmailRoute
   OnboardingAnalyzingRoute: typeof OnboardingAnalyzingRoute
   OnboardingBrandRoute: typeof OnboardingBrandRoute
@@ -366,6 +482,7 @@ export interface RootRouteChildren {
   OnboardingPromptsRoute: typeof OnboardingPromptsRoute
   OnboardingRegionRoute: typeof OnboardingRegionRoute
   OnboardingTopicsRoute: typeof OnboardingTopicsRoute
+  OnboardingIndexRoute: typeof OnboardingIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -377,11 +494,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyEmailRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/team': {
+      id: '/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signup': {
       id: '/signup'
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reset-password': {
@@ -391,11 +522,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/prompts': {
+      id: '/prompts'
+      path: '/prompts'
+      fullPath: '/prompts'
+      preLoaderRoute: typeof PromptsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pricing': {
       id: '/pricing'
       path: '/pricing'
       fullPath: '/pricing'
       preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mentions': {
+      id: '/mentions'
+      path: '/mentions'
+      fullPath: '/mentions'
+      preLoaderRoute: typeof MentionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -412,6 +557,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/competitors': {
+      id: '/competitors'
+      path: '/competitors'
+      fullPath: '/competitors'
+      preLoaderRoute: typeof CompetitorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/billing': {
+      id: '/billing'
+      path: '/billing'
+      fullPath: '/billing'
+      preLoaderRoute: typeof BillingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/app': {
       id: '/app'
       path: '/app'
@@ -419,11 +585,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/alerts': {
+      id: '/alerts'
+      path: '/alerts'
+      fullPath: '/alerts'
+      preLoaderRoute: typeof AlertsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding/': {
+      id: '/onboarding/'
+      path: '/onboarding'
+      fullPath: '/onboarding/'
+      preLoaderRoute: typeof OnboardingIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/app/': {
@@ -604,12 +784,20 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AlertsRoute: AlertsRoute,
   AppRoute: AppRouteWithChildren,
+  BillingRoute: BillingRoute,
+  CompetitorsRoute: CompetitorsRoute,
+  DashboardRoute: DashboardRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
+  MentionsRoute: MentionsRoute,
   PricingRoute: PricingRoute,
+  PromptsRoute: PromptsRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  SettingsRoute: SettingsRoute,
   SignupRoute: SignupRoute,
+  TeamRoute: TeamRoute,
   VerifyEmailRoute: VerifyEmailRoute,
   OnboardingAnalyzingRoute: OnboardingAnalyzingRoute,
   OnboardingBrandRoute: OnboardingBrandRoute,
@@ -619,6 +807,7 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingPromptsRoute: OnboardingPromptsRoute,
   OnboardingRegionRoute: OnboardingRegionRoute,
   OnboardingTopicsRoute: OnboardingTopicsRoute,
+  OnboardingIndexRoute: OnboardingIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

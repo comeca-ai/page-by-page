@@ -32,8 +32,8 @@ function Pricing() {
             <span className="text-lg font-semibold tracking-tight">Mencio</span>
           </Link>
           <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
-            <Link to="/" className="hover:text-foreground">Produto</Link>
-            <Link to="/" className="hover:text-foreground">Como funciona</Link>
+            <a href="/#produto" className="hover:text-foreground">Produto</a>
+            <a href="/#como-funciona" className="hover:text-foreground">Como funciona</a>
             <Link to="/pricing" className="text-foreground font-medium">Preços</Link>
           </nav>
           <div className="flex items-center gap-3">

@@ -64,7 +64,7 @@ function RegionStep() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          navigate({ to: "/onboarding/analyzing" });
+          navigate({ to: "/onboarding/topics" });
         }}
         className="mt-8 space-y-5"
       >

@@ -11,35 +11,50 @@ function PromptsStep() {
 
   return (
     <OnboardingShell
-      step={7}
-      back={{ to: "/onboarding/topics" }}
+      step={8}
+      back={{ to: "/onboarding/region" }}
       aside={
         <div className="space-y-4">
-          <div className="rounded-2xl border border-border bg-background p-5 shadow-sm">
-            <div className="text-xs text-muted-foreground">
-              Pergunta de exemplo
-            </div>
-            <div className="mt-2 text-sm">
-              “Qual a melhor plataforma de automação de marketing pra uma empresa
-              brasileira de médio porte?”
+          {/* chat bubble (question) */}
+          <div className="rounded-2xl border border-border bg-background p-5 shadow-sm animate-fade-in">
+            <div className="flex items-start gap-2">
+              <div className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-foreground/10 text-[10px]">
+                💬
+              </div>
+              <p className="text-sm leading-relaxed">
+                Qual a melhor plataforma de automação de marketing pra uma
+                empresa brasileira de médio porte?
+              </p>
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-2">
-            {["ChatGPT", "Gemini", "Perplexity", "Copilot", "Claude"].map((m) => (
-              <span
-                key={m}
-                className="inline-flex h-8 items-center rounded-full border border-border bg-background px-3 text-xs"
-              >
-                {m}
-              </span>
-            ))}
+          {/* IA logos row */}
+          <div className="rounded-2xl border border-border bg-background p-4 shadow-sm">
+            <div className="flex items-center gap-2">
+              {["GPT", "G", "✦", "C", "P"].map((m, i) => (
+                <div
+                  key={i}
+                  className="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-secondary/60 text-[11px] font-semibold"
+                >
+                  {m}
+                </div>
+              ))}
+              <div className="flex h-8 items-center rounded-full border border-dashed border-border px-3 text-[11px] text-muted-foreground">
+                + mais
+              </div>
+            </div>
+
+            <div className="mt-4 flex items-center gap-3 rounded-lg border border-border bg-secondary/40 px-3 py-2.5">
+              <div className="h-5 w-5 rounded-full border-2 border-foreground/20 border-t-foreground animate-spin" />
+              <span className="text-xs">Rodando as perguntas…</span>
+            </div>
           </div>
 
+          {/* visibility */}
           <div className="rounded-2xl border border-border bg-background p-5 shadow-sm">
-            <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <span>Visibilidade da marca</span>
-              <span className="text-foreground">+ 5%</span>
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-muted-foreground">Visibilidade da marca</span>
+              <span className="font-medium text-emerald-600">+ 5%</span>
             </div>
             <div className="mt-1 text-3xl font-semibold tracking-tight">65%</div>
             <svg viewBox="0 0 200 60" className="mt-3 h-16 w-full">

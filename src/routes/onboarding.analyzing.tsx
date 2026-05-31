@@ -23,7 +23,7 @@ function AnalyzingStep() {
       setI((p) => {
         if (p >= STEPS.length - 1) {
           clearInterval(t);
-          setTimeout(() => navigate({ to: "/onboarding/insights" }), 900);
+          setTimeout(() => navigate({ to: "/onboarding/plan" }), 900);
           return p;
         }
         return p + 1;

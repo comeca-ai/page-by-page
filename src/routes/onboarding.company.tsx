@@ -16,7 +16,7 @@ function CompanyStep() {
 
   return (
     <OnboardingShell
-      step={3}
+      step={1}
       back={{ to: "/verify-email" }}
       aside={
         <Testimonial

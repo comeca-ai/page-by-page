@@ -29,8 +29,8 @@ function RegionStep() {
 
   return (
     <OnboardingShell
-      step={7}
-      back={{ to: "/onboarding/topics" }}
+      step={3}
+      back={{ to: "/onboarding/brand" }}
       aside={
         <div className="relative aspect-square w-full">
           <svg viewBox="0 0 400 400" className="h-full w-full text-foreground/30">
@@ -63,7 +63,7 @@ function RegionStep() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          navigate({ to: "/onboarding/prompts" });
+          navigate({ to: "/onboarding/analyzing" });
         }}
         className="mt-8 space-y-5"
       >

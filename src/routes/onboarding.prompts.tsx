@@ -78,7 +78,7 @@ function PromptsStep() {
       </ul>
 
       <button
-        onClick={() => navigate({ to: "/app" })}
+        onClick={() => navigate({ to: "/onboarding/plan" })}
         className="mt-8 inline-flex h-11 w-full items-center justify-center rounded-lg bg-foreground text-sm font-medium text-background hover:opacity-90"
       >
         Ir pro meu painel

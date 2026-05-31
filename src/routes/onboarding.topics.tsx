@@ -31,7 +31,7 @@ function TopicsStep() {
 
   return (
     <OnboardingShell
-      step={6}
+      step={5}
       back={{ to: "/onboarding/insights" }}
       aside={
         <div className="rounded-2xl border border-border bg-background p-6 shadow-sm">
@@ -111,7 +111,7 @@ function TopicsStep() {
       </ul>
 
       <button
-        onClick={() => navigate({ to: "/onboarding/region" })}
+        onClick={() => navigate({ to: "/onboarding/prompts" })}
         disabled={selected.length === 0}
         className="mt-7 inline-flex h-11 w-full items-center justify-center rounded-lg bg-foreground text-sm font-medium text-background transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
       >

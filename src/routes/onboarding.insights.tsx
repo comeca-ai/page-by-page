@@ -18,8 +18,8 @@ function InsightsStep() {
 
   return (
     <OnboardingShell
-      step={5}
-      back={{ to: "/onboarding/brand" }}
+      step={4}
+      back={{ to: "/onboarding/region" }}
       aside={
         <div className="rounded-2xl border border-border bg-background p-6 shadow-sm">
           <div className="text-xs uppercase tracking-widest text-muted-foreground">

@@ -13,7 +13,7 @@ function BrandStep() {
 
   return (
     <OnboardingShell
-      step={4}
+      step={2}
       back={{ to: "/onboarding/company" }}
       aside={
         <Testimonial
@@ -27,7 +27,7 @@ function BrandStep() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          if (site) navigate({ to: "/onboarding/analyzing" });
+          if (site) navigate({ to: "/onboarding/region" });
         }}
       >
         <h1 className="text-3xl font-semibold tracking-tight">

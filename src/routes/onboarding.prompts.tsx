@@ -11,8 +11,8 @@ function PromptsStep() {
 
   return (
     <OnboardingShell
-      step={8}
-      back={{ to: "/onboarding/region" }}
+      step={6}
+      back={{ to: "/onboarding/topics" }}
       aside={
         <div className="space-y-4">
           {/* chat bubble (question) */}

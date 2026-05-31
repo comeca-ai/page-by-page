@@ -19,6 +19,7 @@ import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as OnboardingTopicsRouteImport } from './routes/onboarding.topics'
+import { Route as OnboardingRegionRouteImport } from './routes/onboarding.region'
 import { Route as OnboardingPromptsRouteImport } from './routes/onboarding.prompts'
 import { Route as OnboardingPlanRouteImport } from './routes/onboarding.plan'
 import { Route as OnboardingInsightsRouteImport } from './routes/onboarding.insights'
@@ -84,6 +85,11 @@ const AppIndexRoute = AppIndexRouteImport.update({
 const OnboardingTopicsRoute = OnboardingTopicsRouteImport.update({
   id: '/onboarding/topics',
   path: '/onboarding/topics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRegionRoute = OnboardingRegionRouteImport.update({
+  id: '/onboarding/region',
+  path: '/onboarding/region',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OnboardingPromptsRoute = OnboardingPromptsRouteImport.update({
@@ -190,6 +196,7 @@ export interface FileRoutesByFullPath {
   '/onboarding/insights': typeof OnboardingInsightsRoute
   '/onboarding/plan': typeof OnboardingPlanRoute
   '/onboarding/prompts': typeof OnboardingPromptsRoute
+  '/onboarding/region': typeof OnboardingRegionRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
   '/app/': typeof AppIndexRoute
   '/app/a/$slug': typeof AppASlugRoute
@@ -217,6 +224,7 @@ export interface FileRoutesByTo {
   '/onboarding/insights': typeof OnboardingInsightsRoute
   '/onboarding/plan': typeof OnboardingPlanRoute
   '/onboarding/prompts': typeof OnboardingPromptsRoute
+  '/onboarding/region': typeof OnboardingRegionRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
   '/app': typeof AppIndexRoute
   '/app/a/$slug': typeof AppASlugRoute
@@ -246,6 +254,7 @@ export interface FileRoutesById {
   '/onboarding/insights': typeof OnboardingInsightsRoute
   '/onboarding/plan': typeof OnboardingPlanRoute
   '/onboarding/prompts': typeof OnboardingPromptsRoute
+  '/onboarding/region': typeof OnboardingRegionRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
   '/app/': typeof AppIndexRoute
   '/app/a/$slug': typeof AppASlugRoute
@@ -276,6 +285,7 @@ export interface FileRouteTypes {
     | '/onboarding/insights'
     | '/onboarding/plan'
     | '/onboarding/prompts'
+    | '/onboarding/region'
     | '/onboarding/topics'
     | '/app/'
     | '/app/a/$slug'
@@ -303,6 +313,7 @@ export interface FileRouteTypes {
     | '/onboarding/insights'
     | '/onboarding/plan'
     | '/onboarding/prompts'
+    | '/onboarding/region'
     | '/onboarding/topics'
     | '/app'
     | '/app/a/$slug'
@@ -331,6 +342,7 @@ export interface FileRouteTypes {
     | '/onboarding/insights'
     | '/onboarding/plan'
     | '/onboarding/prompts'
+    | '/onboarding/region'
     | '/onboarding/topics'
     | '/app/'
     | '/app/a/$slug'
@@ -352,6 +364,7 @@ export interface RootRouteChildren {
   OnboardingInsightsRoute: typeof OnboardingInsightsRoute
   OnboardingPlanRoute: typeof OnboardingPlanRoute
   OnboardingPromptsRoute: typeof OnboardingPromptsRoute
+  OnboardingRegionRoute: typeof OnboardingRegionRoute
   OnboardingTopicsRoute: typeof OnboardingTopicsRoute
 }
 
@@ -425,6 +438,13 @@ declare module '@tanstack/react-router' {
       path: '/onboarding/topics'
       fullPath: '/onboarding/topics'
       preLoaderRoute: typeof OnboardingTopicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding/region': {
+      id: '/onboarding/region'
+      path: '/onboarding/region'
+      fullPath: '/onboarding/region'
+      preLoaderRoute: typeof OnboardingRegionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboarding/prompts': {
@@ -597,8 +617,19 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingInsightsRoute: OnboardingInsightsRoute,
   OnboardingPlanRoute: OnboardingPlanRoute,
   OnboardingPromptsRoute: OnboardingPromptsRoute,
+  OnboardingRegionRoute: OnboardingRegionRoute,
   OnboardingTopicsRoute: OnboardingTopicsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

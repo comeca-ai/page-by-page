@@ -70,34 +70,29 @@ export function OnboardingShell({
       </div>
 
       {/* Right */}
-      <div className="relative hidden overflow-hidden bg-secondary/40 lg:block">
+      <div className="relative hidden overflow-hidden border-l border-border bg-secondary lg:block">
         {/* dot grid */}
         <div
-          className="absolute inset-0 opacity-[0.3]"
+          className="absolute inset-0 opacity-[0.35]"
           style={{
             backgroundImage:
               "radial-gradient(circle at 1px 1px, var(--color-muted-foreground) 1px, transparent 0)",
-            backgroundSize: "18px 18px",
+            backgroundSize: "20px 20px",
           }}
         />
-        {/* radial glow */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(120% 80% at 50% 0%, color-mix(in oklab, var(--color-foreground) 8%, transparent) 0%, transparent 60%)",
-          }}
-        />
-        {/* subtle vignette */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/30" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/40" />
 
-        <div className="relative flex h-full items-center justify-center p-12">
-          <div className="w-full max-w-md">{aside}</div>
-        </div>
+        <div className="relative flex h-full flex-col justify-between p-10">
+          <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+            <span>ONBOARDING_FLOW</span>
+            <span>STEP_{String(step).padStart(2, "0")}</span>
+          </div>
 
-        {/* footer brand line */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground/70">
-          Mencio · Visibilidade de marca em IA
+          <div className="w-full max-w-md self-center">{aside}</div>
+
+          <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+            Mencio · visibilidade de marca em IA
+          </div>
         </div>
       </div>
     </div>
@@ -116,25 +111,87 @@ export function Testimonial({
   brand?: string;
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-background/95 p-6 shadow-[0_1px_0_rgba(0,0,0,0.02),0_20px_40px_-20px_rgba(0,0,0,0.15)] backdrop-blur">
-      <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-        Quem já usa
+    <ChatMock
+      question="Como sua marca aparece nas respostas das IAs?"
+      answer={
+        <>
+          A maioria das marcas brasileiras já é citada por modelos como{" "}
+          <Hi>ChatGPT</Hi> e <Hi>Perplexity</Hi>. O time da{" "}
+          <Hi>{brand ?? "sua marca"}</Hi> entrou aqui pra entender exatamente em
+          que respostas ela aparece — e em quais ainda não.
+        </>
+      }
+      footer={
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="h-9 w-9 rounded-full bg-gradient-to-br from-foreground/25 to-foreground/5" />
+            <div className="text-xs">
+              <div className="font-semibold">{name}</div>
+              <div className="text-muted-foreground">{role}</div>
+            </div>
+          </div>
+          {brand && (
+            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              {brand}
+            </div>
+          )}
+          <span className="sr-only">{quote}</span>
+        </div>
+      }
+    />
+  );
+}
+
+function Hi({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="bg-accent px-1 font-semibold text-accent-foreground">
+      {children}
+    </span>
+  );
+}
+
+export function ChatMock({
+  question,
+  answer,
+  footer,
+  source = "PERPLEXITY_AI",
+}: {
+  question: string;
+  answer: React.ReactNode;
+  footer?: React.ReactNode;
+  source?: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-border bg-background p-6 shadow-[0_1px_0_rgba(0,0,0,0.02),0_30px_60px_-30px_rgba(0,0,0,0.25)]">
+      <div className="flex items-center gap-2 border-b border-border pb-4">
+        <span className="h-2.5 w-2.5 rounded-full bg-border" />
+        <span className="h-2.5 w-2.5 rounded-full bg-border" />
+        <span className="h-2.5 w-2.5 rounded-full bg-border" />
+        <span className="ml-2 font-mono text-[10px] tracking-[0.22em] text-muted-foreground">
+          {source}
+        </span>
       </div>
-      <p className="mt-3 text-sm leading-relaxed">{quote}</p>
-      <div className="mt-5 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="h-9 w-9 rounded-full bg-gradient-to-br from-foreground/20 to-foreground/5" />
-          <div className="text-xs">
-            <div className="font-medium">{name}</div>
-            <div className="text-muted-foreground">{role}</div>
+      <div className="mt-5 space-y-4">
+        <div>
+          <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+            Pergunta
+          </div>
+          <div className="mt-1.5 text-[15px] font-medium leading-snug">
+            {question}
           </div>
         </div>
-        {brand && (
-          <div className="text-xs font-semibold tracking-tight text-muted-foreground">
-            {brand}
+        <div className="h-px bg-border" />
+        <div>
+          <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+            Resposta da IA
           </div>
-        )}
+          <p className="mt-1.5 text-sm leading-relaxed text-foreground/85">
+            {answer}
+          </p>
+        </div>
       </div>
+      {footer && <div className="mt-6 border-t border-border pt-5">{footer}</div>}
     </div>
   );
 }
+

@@ -52,7 +52,7 @@ function SignupPage() {
       email,
       password,
       options: {
-        emailRedirectTo: window.location.origin + "/app",
+        emailRedirectTo: window.location.origin + "/onboarding/company",
         data: { first_name: firstName, last_name: lastName },
       },
     });

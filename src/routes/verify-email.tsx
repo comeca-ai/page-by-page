@@ -31,6 +31,7 @@ function VerifyEmailPage() {
   return (
     <OnboardingShell
       step={2}
+      totalSteps={2}
       back={{ to: "/signup", label: "Voltar" }}
       aside={
         <Testimonial

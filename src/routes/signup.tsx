@@ -71,6 +71,7 @@ function SignupPage() {
   return (
     <OnboardingShell
       step={1}
+      totalSteps={2}
       footerLeft={
         <span>
           Já tem conta?{" "}

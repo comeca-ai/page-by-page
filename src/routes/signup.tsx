@@ -72,14 +72,6 @@ function SignupPage() {
     <OnboardingShell
       step={1}
       totalSteps={2}
-      footerLeft={
-        <span>
-          Já tem conta?{" "}
-          <Link to="/login" className="text-foreground hover:underline">
-            Entrar
-          </Link>
-        </span>
-      }
       aside={
         <Testimonial
           quote="“A Mencio mostrou pra gente, em tempo real, como a marca aparecia (ou não) nas respostas do ChatGPT e Gemini. Mudou o jeito que pensamos posicionamento.”"

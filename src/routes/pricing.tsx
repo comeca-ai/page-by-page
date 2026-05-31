@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check, Sparkles } from "lucide-react";
+import { Check } from "lucide-react";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
@@ -13,8 +13,7 @@ export const Route = createFileRoute("/pricing")({
       { property: "og:title", content: "Preços — Mencio" },
       {
         property: "og:description",
-        content:
-          "Planos da Mencio: comece de graça no Beta, escale com o Crescimento ou vá com a Agência.",
+        content: "Planos da Mencio: comece de graça e escale quando precisar.",
       },
     ],
   }),
@@ -24,122 +23,153 @@ export const Route = createFileRoute("/pricing")({
 function Pricing() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Nav */}
       <header className="border-b border-border">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
           <Link to="/" className="flex items-center gap-2">
             <div className="h-7 w-7 rounded-md bg-foreground" />
-            <span className="text-lg font-semibold tracking-tight">Mencio</span>
+            <span className="text-lg font-extrabold tracking-tight">Mencio</span>
           </Link>
-          <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
+          <nav className="hidden items-center gap-8 text-sm font-medium text-muted-foreground md:flex">
             <a href="/#produto" className="hover:text-foreground">Produto</a>
             <a href="/#como-funciona" className="hover:text-foreground">Como funciona</a>
-            <Link to="/pricing" className="text-foreground font-medium">Preços</Link>
+            <Link to="/pricing" className="text-foreground">Preços</Link>
           </nav>
           <div className="flex items-center gap-3">
-            <Link
-              to="/login"
-              className="text-sm text-muted-foreground hover:text-foreground"
-            >
+            <Link to="/login" className="text-sm font-medium text-muted-foreground hover:text-foreground">
               Entrar
             </Link>
-            <a
-              href="mailto:oi@mencio.com.br"
-              className="inline-flex items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90"
+            <Link
+              to="/signup"
+              className="rounded-lg bg-foreground px-4 py-2 text-sm font-bold text-background hover:opacity-90"
             >
-              Agendar demo
-            </a>
+              Começar grátis
+            </Link>
           </div>
         </div>
       </header>
 
       {/* Hero */}
-      <section className="mx-auto max-w-6xl px-6 pt-20 pb-12 text-center">
-        <div className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3 py-1 text-xs text-muted-foreground">
-          <Sparkles className="h-3.5 w-3.5" />
-          Preços simples, sem surpresa
+      <section className="mx-auto max-w-7xl px-6 pt-20 pb-10">
+        <div className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+          PRICING_v2 · sem letra miúda
         </div>
-        <h1 className="mx-auto max-w-2xl text-4xl font-semibold tracking-tight md:text-5xl">
-          Escolha o plano certo pra sua marca
+        <h1 className="mt-6 max-w-3xl text-5xl font-extrabold leading-none tracking-tighter md:text-7xl">
+          Pague pelo que <span className="text-muted-foreground">você mede.</span>
         </h1>
-        <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-          Comece de graça, escale quando tiver certeza. Todos os planos com
-          suporte em português.
+        <p className="mt-6 max-w-xl text-lg text-muted-foreground">
+          Começa de graça. Vira plano pago quando suas menções valerem dinheiro
+          de verdade — não antes.
         </p>
       </section>
 
       {/* Cards */}
-      <section className="mx-auto max-w-6xl px-6 pb-24">
-        <div className="grid gap-6 md:grid-cols-3">
+      <section className="mx-auto max-w-7xl px-6 pb-20">
+        <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
           <PlanCard
-            name="Beta"
-            price="Grátis"
-            priceDetail="Enquanto durar o programa"
-            description="Perfeito pra experimentar e ver o que a IA fala da sua marca."
+            name="BETA"
+            price="R$ 0"
+            priceDetail="enquanto durar o programa"
+            description="Pra experimentar e ver o que a IA já fala da sua marca."
             features={[
-              "1 marca",
+              "1 marca monitorada",
               "10 prompts/mês",
               "Relatório básico de menções",
               "Acesso ao painel",
               "Suporte por email",
             ]}
             cta="Começar agora"
-            ctaVariant="outline"
           />
           <PlanCard
-            name="Crescimento"
+            name="CRESCIMENTO"
             price="R$ 490"
-            priceDetail="/mês"
+            priceDetail="/mês · cobrado mensal"
             description="Para marcas que querem dominar as respostas das IAs de verdade."
             features={[
               "Até 3 marcas",
               "200 prompts/mês",
               "Relatórios completos com contexto",
-              "Alertas de menções em tempo real",
+              "Alertas em tempo real",
               "Recomendações de ação",
               "Suporte prioritário",
             ]}
             cta="Assinar"
-            ctaVariant="primary"
             highlighted
           />
           <PlanCard
-            name="Agência"
+            name="AGÊNCIA"
             price="Sob consulta"
-            priceDetail=""
+            priceDetail="conversa com nosso time"
             description="Para agências e grupos que gerenciam dezenas de marcas."
             features={[
               "Marcas ilimitadas",
               "Prompts ilimitados",
-              "API e integrações customizadas",
+              "API e integrações",
               "White-label disponível",
               "Account manager dedicado",
               "SLA garantido",
             ]}
             cta="Falar com vendas"
-            ctaVariant="outline"
           />
         </div>
 
-        {/* FAQ teaser */}
-        <div className="mt-16 text-center">
-          <p className="text-sm text-muted-foreground">
-            Tem dúvidas?{" "}
-            <a href="mailto:oi@mencio.com.br" className="underline hover:text-foreground">
-              Manda um email
-            </a>{" "}
-            que a gente responde em poucas horas.
-          </p>
+        <p className="mt-10 text-center font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+          Sem cartão de crédito · cancela quando quiser · suporte em português
+        </p>
+      </section>
+
+      {/* Compare strip */}
+      <section className="border-y border-border bg-foreground py-16 text-background">
+        <div className="mx-auto max-w-5xl px-6">
+          <h2 className="text-3xl font-extrabold italic tracking-tight">
+            O que entra em todo plano
+          </h2>
+          <div className="mt-10 grid gap-px overflow-hidden rounded-xl bg-background/10 md:grid-cols-3">
+            {[
+              ["ChatGPT, Gemini & Perplexity", "Monitoramos os três modelos que importam no Brasil hoje."],
+              ["Dashboard em tempo real", "Veja sua taxa de menção subir (ou cair) a cada varredura."],
+              ["Exportação ilimitada", "CSV, PDF e link público — leva pra reunião."],
+            ].map(([t, d]) => (
+              <div key={t} className="bg-foreground p-6">
+                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-background/50">
+                  INCLUSO
+                </div>
+                <h3 className="mt-3 text-lg font-bold">{t}</h3>
+                <p className="mt-2 text-sm text-background/70">{d}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
+      {/* CTA */}
+      <section className="mx-auto max-w-3xl px-6 py-24 text-center">
+        <h2 className="text-4xl font-black tracking-tighter md:text-5xl">
+          Ainda na dúvida?
+        </h2>
+        <p className="mt-6 text-lg text-muted-foreground">
+          Cria a conta grátis. Em 5 minutos você vê o que a IA já diz sobre
+          você — e decide depois.
+        </p>
+        <Link
+          to="/signup"
+          className="mt-8 inline-block rounded-xl bg-foreground px-10 py-4 text-base font-bold text-background transition-transform hover:scale-105 active:scale-95"
+        >
+          Criar conta grátis
+        </Link>
+      </section>
+
       <footer className="border-t border-border">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 py-8 text-sm text-muted-foreground md:flex-row">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-8 text-sm text-muted-foreground md:flex-row">
           <div className="flex items-center gap-2">
             <div className="h-5 w-5 rounded bg-foreground" />
-            <span>Mencio</span>
+            <span className="font-bold text-foreground">Mencio</span>
           </div>
           <p>© {new Date().getFullYear()} Mencio. Feito no Brasil.</p>
+          <div className="flex gap-6">
+            <Link to="/" className="hover:text-foreground">Início</Link>
+            <Link to="/login" className="hover:text-foreground">Entrar</Link>
+            <a href="mailto:oi@mencio.com.br" className="hover:text-foreground">Contato</a>
+          </div>
         </div>
       </footer>
     </div>
@@ -153,7 +183,6 @@ function PlanCard({
   description,
   features,
   cta,
-  ctaVariant,
   highlighted = false,
 }: {
   name: string;
@@ -162,65 +191,51 @@ function PlanCard({
   description: string;
   features: string[];
   cta: string;
-  ctaVariant: "primary" | "outline";
   highlighted?: boolean;
 }) {
   return (
     <div
-      className={`relative flex flex-col rounded-xl border p-6 ${
-        highlighted
-          ? "border-foreground bg-foreground text-background"
-          : "border-border bg-background"
+      className={`relative flex flex-col p-8 ${
+        highlighted ? "bg-foreground text-background" : "bg-background"
       }`}
     >
-      {highlighted && (
-        <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-background px-3 py-0.5 text-xs font-medium text-foreground">
-          Mais popular
-        </span>
-      )}
-      <h3 className="text-sm font-medium uppercase tracking-wider opacity-70">
-        {name}
-      </h3>
-      <div className="mt-3 flex items-baseline gap-1">
-        <span className="text-3xl font-semibold tracking-tight">{price}</span>
-        {priceDetail && (
-          <span className={`text-sm ${highlighted ? "opacity-70" : "text-muted-foreground"}`}>
-            {priceDetail}
+      <div className="flex items-center justify-between">
+        <span className="font-mono text-xs tracking-[0.2em] opacity-70">{name}</span>
+        {highlighted && (
+          <span className="rounded-full bg-accent px-2.5 py-0.5 font-mono text-[10px] font-bold tracking-widest text-accent-foreground">
+            ESCOLHIDO
           </span>
         )}
       </div>
-      <p className={`mt-3 text-sm ${highlighted ? "opacity-80" : "text-muted-foreground"}`}>
+      <div className="mt-6 flex items-baseline gap-2">
+        <span className="text-5xl font-black tracking-tighter">{price}</span>
+      </div>
+      <p className={`mt-1 font-mono text-xs ${highlighted ? "opacity-60" : "text-muted-foreground"}`}>
+        {priceDetail}
+      </p>
+      <p className={`mt-5 text-sm ${highlighted ? "opacity-80" : "text-muted-foreground"}`}>
         {description}
       </p>
-      <ul className="mt-6 space-y-3">
+      <div className={`my-6 h-px ${highlighted ? "bg-background/15" : "bg-border"}`} />
+      <ul className="space-y-3">
         {features.map((f) => (
-          <li key={f} className="flex items-start gap-2 text-sm">
-            <Check className="mt-0.5 h-4 w-4 shrink-0 opacity-70" />
+          <li key={f} className="flex items-start gap-2.5 text-sm">
+            <Check className={`mt-0.5 h-4 w-4 shrink-0 ${highlighted ? "opacity-80" : "opacity-60"}`} />
             <span>{f}</span>
           </li>
         ))}
       </ul>
       <div className="mt-auto pt-8">
-        {ctaVariant === "primary" ? (
-          <Link
-            to="/signup"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-background px-5 py-2.5 text-sm font-medium text-foreground hover:opacity-90"
-          >
-            {cta}
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        ) : (
-          <Link
-            to="/signup"
-            className={`inline-flex w-full items-center justify-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium hover:opacity-90 ${
-              highlighted
-                ? "border-background/30 bg-transparent text-background"
-                : "border-border hover:bg-secondary"
-            }`}
-          >
-            {cta}
-          </Link>
-        )}
+        <Link
+          to="/signup"
+          className={`inline-flex w-full items-center justify-center rounded-lg px-5 py-3 text-sm font-bold transition ${
+            highlighted
+              ? "bg-background text-foreground hover:opacity-90"
+              : "border border-foreground hover:bg-foreground hover:text-background"
+          }`}
+        >
+          {cta}
+        </Link>
       </div>
     </div>
   );

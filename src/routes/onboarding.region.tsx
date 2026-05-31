@@ -29,7 +29,8 @@ function RegionStep() {
 
   return (
     <OnboardingShell
-      step={3}
+      step={2}
+      brand={{ name: "Sua marca", url: "suamarca.com.br" }}
       back={{ to: "/onboarding/brand" }}
       aside={
         <div className="relative aspect-square w-full">
@@ -63,7 +64,7 @@ function RegionStep() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          navigate({ to: "/onboarding/analyzing" });
+          navigate({ to: "/onboarding/topics" });
         }}
         className="mt-8 space-y-5"
       >

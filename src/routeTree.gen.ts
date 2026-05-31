@@ -28,6 +28,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as OnboardingIndexRouteImport } from './routes/onboarding.index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as OnboardingTopicsRouteImport } from './routes/onboarding.topics'
+import { Route as OnboardingReviewPromptsRouteImport } from './routes/onboarding.review-prompts'
 import { Route as OnboardingRegionRouteImport } from './routes/onboarding.region'
 import { Route as OnboardingPromptsRouteImport } from './routes/onboarding.prompts'
 import { Route as OnboardingPlanRouteImport } from './routes/onboarding.plan'
@@ -139,6 +140,11 @@ const AppIndexRoute = AppIndexRouteImport.update({
 const OnboardingTopicsRoute = OnboardingTopicsRouteImport.update({
   id: '/onboarding/topics',
   path: '/onboarding/topics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingReviewPromptsRoute = OnboardingReviewPromptsRouteImport.update({
+  id: '/onboarding/review-prompts',
+  path: '/onboarding/review-prompts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OnboardingRegionRoute = OnboardingRegionRouteImport.update({
@@ -259,6 +265,7 @@ export interface FileRoutesByFullPath {
   '/onboarding/plan': typeof OnboardingPlanRoute
   '/onboarding/prompts': typeof OnboardingPromptsRoute
   '/onboarding/region': typeof OnboardingRegionRoute
+  '/onboarding/review-prompts': typeof OnboardingReviewPromptsRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
   '/app/': typeof AppIndexRoute
   '/onboarding/': typeof OnboardingIndexRoute
@@ -296,6 +303,7 @@ export interface FileRoutesByTo {
   '/onboarding/plan': typeof OnboardingPlanRoute
   '/onboarding/prompts': typeof OnboardingPromptsRoute
   '/onboarding/region': typeof OnboardingRegionRoute
+  '/onboarding/review-prompts': typeof OnboardingReviewPromptsRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
   '/app': typeof AppIndexRoute
   '/onboarding': typeof OnboardingIndexRoute
@@ -335,6 +343,7 @@ export interface FileRoutesById {
   '/onboarding/plan': typeof OnboardingPlanRoute
   '/onboarding/prompts': typeof OnboardingPromptsRoute
   '/onboarding/region': typeof OnboardingRegionRoute
+  '/onboarding/review-prompts': typeof OnboardingReviewPromptsRoute
   '/onboarding/topics': typeof OnboardingTopicsRoute
   '/app/': typeof AppIndexRoute
   '/onboarding/': typeof OnboardingIndexRoute
@@ -375,6 +384,7 @@ export interface FileRouteTypes {
     | '/onboarding/plan'
     | '/onboarding/prompts'
     | '/onboarding/region'
+    | '/onboarding/review-prompts'
     | '/onboarding/topics'
     | '/app/'
     | '/onboarding/'
@@ -412,6 +422,7 @@ export interface FileRouteTypes {
     | '/onboarding/plan'
     | '/onboarding/prompts'
     | '/onboarding/region'
+    | '/onboarding/review-prompts'
     | '/onboarding/topics'
     | '/app'
     | '/onboarding'
@@ -450,6 +461,7 @@ export interface FileRouteTypes {
     | '/onboarding/plan'
     | '/onboarding/prompts'
     | '/onboarding/region'
+    | '/onboarding/review-prompts'
     | '/onboarding/topics'
     | '/app/'
     | '/onboarding/'
@@ -481,6 +493,7 @@ export interface RootRouteChildren {
   OnboardingPlanRoute: typeof OnboardingPlanRoute
   OnboardingPromptsRoute: typeof OnboardingPromptsRoute
   OnboardingRegionRoute: typeof OnboardingRegionRoute
+  OnboardingReviewPromptsRoute: typeof OnboardingReviewPromptsRoute
   OnboardingTopicsRoute: typeof OnboardingTopicsRoute
   OnboardingIndexRoute: typeof OnboardingIndexRoute
 }
@@ -618,6 +631,13 @@ declare module '@tanstack/react-router' {
       path: '/onboarding/topics'
       fullPath: '/onboarding/topics'
       preLoaderRoute: typeof OnboardingTopicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding/review-prompts': {
+      id: '/onboarding/review-prompts'
+      path: '/onboarding/review-prompts'
+      fullPath: '/onboarding/review-prompts'
+      preLoaderRoute: typeof OnboardingReviewPromptsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboarding/region': {
@@ -806,6 +826,7 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingPlanRoute: OnboardingPlanRoute,
   OnboardingPromptsRoute: OnboardingPromptsRoute,
   OnboardingRegionRoute: OnboardingRegionRoute,
+  OnboardingReviewPromptsRoute: OnboardingReviewPromptsRoute,
   OnboardingTopicsRoute: OnboardingTopicsRoute,
   OnboardingIndexRoute: OnboardingIndexRoute,
 }

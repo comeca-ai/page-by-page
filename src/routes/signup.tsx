@@ -30,7 +30,7 @@ function SignupPage() {
   async function handleGoogle() {
     setLoading(true);
     const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin + "/onboarding/company",
+      redirect_uri: window.location.origin + "/onboarding/brand",
     });
     if (result.error) {
       toast.error("Não foi possível entrar com Google");
@@ -38,7 +38,7 @@ function SignupPage() {
       return;
     }
     if (result.redirected) return;
-    navigate({ to: "/onboarding/company" });
+    navigate({ to: "/onboarding/brand" });
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -52,7 +52,7 @@ function SignupPage() {
       email,
       password,
       options: {
-        emailRedirectTo: window.location.origin + "/onboarding/company",
+        emailRedirectTo: window.location.origin + "/onboarding/brand",
         data: { first_name: firstName, last_name: lastName },
       },
     });
@@ -62,7 +62,7 @@ function SignupPage() {
       return;
     }
     if (data.session) {
-      navigate({ to: "/onboarding/company" });
+      navigate({ to: "/onboarding/brand" });
     } else {
       navigate({ to: "/verify-email", search: { email } as never });
     }
@@ -72,14 +72,6 @@ function SignupPage() {
     <OnboardingShell
       step={1}
       totalSteps={2}
-      footerLeft={
-        <span>
-          Já tem conta?{" "}
-          <Link to="/login" className="text-foreground hover:underline">
-            Entrar
-          </Link>
-        </span>
-      }
       aside={
         <Testimonial
           quote="“A Mencio mostrou pra gente, em tempo real, como a marca aparecia (ou não) nas respostas do ChatGPT e Gemini. Mudou o jeito que pensamos posicionamento.”"
